@@ -1,10 +1,10 @@
 -- Création de la table ARTICLE
 CREATE TABLE IF NOT EXISTS ARTICLE (
-    id INT(8) PRIMARY KEY,
+    id INT(8) PRIMARY KEY AUTO_INCREMENT,
     titre VARCHAR(50),
     resume VARCHAR(500) NULL,
     contenu TEXT,
-    date_crea DATE
+    date_crea DATE NOT NULL
 );
 
 -- Création de la table CATEGORIE
