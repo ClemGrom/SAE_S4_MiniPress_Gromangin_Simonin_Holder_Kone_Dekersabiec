@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS ARTICLE (
     date_crea DATE,
     categ_id INT(4),
     author_id INT(11),
-    FOREIGN KEY(categ_id) REFERENCES CATEGORIE(id)
+    FOREIGN KEY(categ_id) REFERENCES CATEGORIE(id),
     FOREIGN KEY(author_id) REFERENCES UTILISATEUR(id)
 );
 
