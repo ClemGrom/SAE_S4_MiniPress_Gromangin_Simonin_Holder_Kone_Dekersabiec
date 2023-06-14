@@ -4,6 +4,8 @@
 # Ignorer tous les fichiers dans le répertoire vendor/
 /gift.appli/src/composer.lock
 /gift.appli/src/vendor/*
+/minipress.api/src/composer.lock
+/minipress.api/src/vendor/*
 
 #Ignorer le .idea
 *.idea
