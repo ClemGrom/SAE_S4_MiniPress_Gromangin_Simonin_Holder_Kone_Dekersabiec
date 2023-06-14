@@ -44,19 +44,19 @@ services:
     depends_on:
       - sql
 
-#  api:
-#    hostname: api
-#    image: canals/php
-#    ports:
-#      - 20003:80
-#    volumes:
-#      - ..........:/var/www/html
-#      - ..........:/var/www/src
-#    working_dir: /var/www/src
-#    networks:
-#      - minipress.net
-#    depends_on:
-#      - sql
+  api:
+    hostname: api
+    image: canals/php
+    ports:
+      - 20003:80
+    volumes:
+      - ../minipress.api/public:/var/www/html
+      - ../minipress.api/src:/var/www/src
+    working_dir: /var/www/src
+    networks:
+      - minipress.net
+    depends_on:
+      - sql
 
   nginx:
     hostname: nginx
