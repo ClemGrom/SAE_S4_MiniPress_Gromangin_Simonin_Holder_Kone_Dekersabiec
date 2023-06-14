@@ -2,8 +2,8 @@
 *.ini
 
 # Ignorer tous les fichiers dans le répertoire vendor/
-/gift.appli/src/composer.lock
-/gift.appli/src/vendor/*
+/minipress.appli/src/composer.lock
+/minipress.appli/src/vendor/*
 
 #Ignorer le .idea
 *.idea
