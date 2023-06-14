@@ -1,0 +1,16 @@
+# Ignorer le fichier conf.ini
+*.ini
+
+# Ignorer tous les fichiers dans le répertoire vendor/
+/minipress.appli/src/composer.lock
+/minipress.appli/src/vendor/*
+/minipress.api/src/composer.lock
+/minipress.api/src/vendor/*
+
+#Ignorer le .idea
+*.idea
+
+#Ignorer les fichier xml
+*.xml
+
+databases
