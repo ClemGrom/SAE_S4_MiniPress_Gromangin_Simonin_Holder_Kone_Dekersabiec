@@ -1,0 +1,12 @@
+# Ignorer le fichier conf.ini
+*.ini
+
+# Ignorer tous les fichiers dans le répertoire vendor/
+/gift.appli/src/composer.lock
+/gift.appli/src/vendor/*
+
+#Ignorer le .idea
+*.idea
+
+#Ignorer les fichier xml
+*.xml
