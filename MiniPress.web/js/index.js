@@ -1,3 +1,5 @@
-import {getCategories} from "./lib/categories.js";
+import {affichage_categories} from "./lib/categories.js";
 
-console.log(await getCategories())
+if(window.location.href.includes("categories.html")){
+    affichage_categories();
+}
