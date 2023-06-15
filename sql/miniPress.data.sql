@@ -76,3 +76,10 @@ Prenez des pauses régulières: Si vous travaillez sur un ordinateur ou passez b
         'Découvrez les dernières tendances en matière de décoration pour créer un intérieur moderne et élégant.',
         'Le contenu de l\'article sur les tendances en matière de décoration intérieure...', '2033-06-05', 1);
 
+INSERT INTO `USER_STATUS` (`id`, `libelle`) VALUES
+    (1, 'Inscrit'),
+    (2, 'Inscrit, admin'),
+    (3, 'Inscrit, auteur');
+    (4, 'Inscrit, connecte'),
+    (5, 'Inscrit, connecte, admin'),
+    (6, 'Inscrit, connecte, auteur');
