@@ -15,13 +15,19 @@ class GetArticlesAuthorApiAction
         $a = $as->getAuthorID($args['id']);
         $articles = $a->articles()->get();
 
-        $articles_api = [
-            'articles' => [],
-            'author' => []
+        $author_api = [
+            'auteur' => [],
+            'articles' => []
+        ];
+
+        $author_api['author'][] = [
+            'id' => $a['id'],
+            'email' => $a['email'],
+            'username' => $a['username'],
         ];
 
         foreach ($articles as $article) {
-            $articles_api['articles'][] = [
+            $author_api['articles'][] = [
                 'id' => $article['id'],
                 'titre' => $article['titre'],
                 'auteur' => $article['author_id'],
@@ -30,12 +36,6 @@ class GetArticlesAuthorApiAction
             ];
         }
 
-        $author_api['author'][] = [
-            'id' => $a['id'],
-            'email' => $a['email'],
-            'username' => $a['username'],
-            'articles' => $articles_api
-        ];
 
         $rs->getBody()->write(json_encode($author_api));
         return $rs
