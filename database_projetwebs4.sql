@@ -15,6 +15,12 @@ CREATE TABLE IF NOT EXISTS CATEGORIE (
     description TEXT
 );
 
+-- Création de la table USER_STATUS
+CREATE TABLE IF NOT EXISTS USER_STATUS (
+    id INT(3) PRIMARY KEY,
+    libelle VARCHAR(50)
+);
+
 -- Création de la table UTILISATEUR
 CREATE TABLE IF NOT EXISTS UTILISATEUR (
     id INT(11) PRIMARY KEY,
@@ -27,12 +33,6 @@ CREATE TABLE IF NOT EXISTS UTILISATEUR (
     renew_expires TIMESTAMP,
     user_status INT(3),
     FOREIGN KEY (user_status) REFERENCES USER_STATUS(id)
-);
-
--- Création de la table USER_STATUS
-CREATE TABLE IF NOT EXISTS USER_STATUS (
-    id INT(3) PRIMARY KEY,
-    libelle VARCHAR(50)
 );
 
 -- Création de la table IMAGE
