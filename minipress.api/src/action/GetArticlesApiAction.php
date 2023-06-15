@@ -12,7 +12,7 @@ class GetArticlesApiAction
     {
 
         $as = new ArticleServices();
-        $articles = $as->getArticles();
+        $articles = $as->getArticles($_GET['sort']);
 
         $article_api = [
             'articles' => [],
