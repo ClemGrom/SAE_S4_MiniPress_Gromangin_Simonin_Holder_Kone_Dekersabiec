@@ -10,13 +10,17 @@ class GetArticlesAuthorApiAction
 {
     public function __invoke(ServerRequestInterface $rq, ResponseInterface $rs, array $args): ResponseInterface
     {
+
         $as = new AuthorServices();
         $a = $as->getAuthorID($args['id']);
         $articles = $a->articles()->get();
 
-        $articles_api = [];
+        $articles_api = [
+            'articles' => [],
+            'author' => []
+        ];
         foreach ($articles as $article) {
-            $articles_api[] = [
+            $articles_api['articles'][] = [
                 'id' => $article['id'],
                 'titre' => $article['titre'],
                 'auteur' => $article['author_id'],
@@ -25,7 +29,7 @@ class GetArticlesAuthorApiAction
             ];
         }
 
-        $author_api = [
+        $author_api['author'][] = [
             'id' => $a['id'],
             'email' => $a['email'],
             'username' => $a['username'],
