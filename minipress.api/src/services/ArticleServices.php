@@ -1,10 +1,10 @@
 <?php
 
-namespace minipress\api\action;
+namespace minipress\api\services;
 
 use minipress\api\models\Article;
 
-class GetCategoriesActionApi
+class ArticleServices
 {
     public function getArticles()
     {
