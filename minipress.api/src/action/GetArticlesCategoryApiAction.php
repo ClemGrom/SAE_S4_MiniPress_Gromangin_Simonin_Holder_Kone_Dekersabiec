@@ -14,13 +14,20 @@ class GetArticlesCategoryApiAction
         $c = $cs->getCategorieID($args['id']);
         $articles = $c->articles()->get();
 
-        $articles_api = [
-            'articles' => [],
-            'categorie' => []
+        $categorie_api = [
+            'categorie' => [],
+            'articles' => []
+        ];
+
+
+        $categorie_api['categorie'][] = [
+            'id' => $c['id'],
+            'titre' => $c['titre'],
+            'description' => $c['description'],
         ];
 
         foreach ($articles as $article) {
-            $articles_api['articles'][] = [
+            $categorie_api['articles'][] = [
                 'id' => $article['id'],
                 'titre' => $article['titre'],
                 'auteur' => $article['author_id'],
@@ -29,12 +36,6 @@ class GetArticlesCategoryApiAction
             ];
         }
 
-        $categorie_api['categorie'][] = [
-            'id' => $c['id'],
-            'titre' => $c['titre'],
-            'description' => $c['description'],
-            'articles' => $articles_api
-        ];
 
         $rs->getBody()->write(json_encode($categorie_api));
         return $rs
