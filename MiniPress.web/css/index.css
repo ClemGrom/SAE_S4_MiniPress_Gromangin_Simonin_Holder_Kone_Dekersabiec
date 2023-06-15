@@ -22,13 +22,47 @@ a {
     padding-left: 150px;
 }
 
-.categorie, .article{
+.selectable {
     margin: 20px 300px 20px 300px;
     font-family: 'Segoe UI';
     font-size: large;
+    text-align: center;
+    align-content: center;
+}
+
+#loading-icon {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100px;
+}
+
+.anArticle {
+    margin: 5%;
+    text-align: justify;
+}
+
+.selectable, .anArticle {
     border: black 1px solid;
     border-radius: 30px;
-    text-align: center;
     padding: 20px;
-    align-content: center;
+}
+
+.search {
+    display: flex;
+    padding: 12px;
+    background-color: #ade3e3;
+    justify-content: center;
+}
+
+input{
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #609191;
+    border-radius: 4px;
+    background-color: #609191;
+    color: white;
 }
