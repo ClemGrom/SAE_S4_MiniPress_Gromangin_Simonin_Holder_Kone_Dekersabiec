@@ -8,7 +8,7 @@ nav > ul {
     display: flex;
     background-color: #609191;
     padding: 1.5%;
-    padding-left: 25%;
+    justify-content: center;
 }
 
 ul {
@@ -22,7 +22,7 @@ a {
     padding-left: 150px;
 }
 
-.categorie{
+.categorie, .article{
     margin: 20px 300px 20px 300px;
     font-family: 'Segoe UI';
     font-size: large;
