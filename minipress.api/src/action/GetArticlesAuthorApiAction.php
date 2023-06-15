@@ -19,6 +19,7 @@ class GetArticlesAuthorApiAction
             'articles' => [],
             'author' => []
         ];
+
         foreach ($articles as $article) {
             $articles_api['articles'][] = [
                 'id' => $article['id'],
@@ -37,7 +38,10 @@ class GetArticlesAuthorApiAction
         ];
 
         $rs->getBody()->write(json_encode($author_api));
-        return $rs->withHeader('Content-Type', 'application/json')->withStatus(200);
+        return $rs
+            ->withHeader('Access-Control-Allow-Origin', 'http://localhost:20004')
+            ->withHeader('Content-Type', 'application/json')
+            ->withStatus(200);
 
     }
 }

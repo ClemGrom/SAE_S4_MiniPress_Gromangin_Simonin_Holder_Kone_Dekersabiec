@@ -29,6 +29,9 @@ class GetArticlesApiAction
         }
 
         $rs->getBody()->write(json_encode($article_api));
-        return $rs->withHeader('Content-Type', 'application/json')->withStatus(200);
+        return $rs
+            ->withHeader('Access-Control-Allow-Origin', 'http://localhost:20004')
+            ->withHeader('Content-Type', 'application/json')
+            ->withStatus(200);
     }
 }
