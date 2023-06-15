@@ -13,13 +13,28 @@ function getArticleById(id) {
     return load(api_link+ "/articles/" + id)
 }
 
-async function affichage_articles(id) {
+async function getArticlesByMot(mot) {
+    let art = await getArticles()
+    let articles = {articles: []}
+    for(let i = 0; i < art.articles.length; i++){
+        if(art.articles[i].titre.toLowerCase().includes(mot.toLowerCase())){
+            articles.articles.push(art.articles[i])
+        }
+    }
+    window.history.pushState({}, document.title, "/html/" + "articles.html");
+    return articles
+}
+
+async function affichage_articles(id, mot) {
     let art;
-    if(id == null) {
+    if(mot != null){
+        art = await getArticlesByMot(mot)
+    }else if(id == null) {
         art = await getArticles()
-    }else{
+    }else {
         art = await getArticlesById(id)
     }
+    console.log(art)
     let articles = document.getElementsByClassName("articles");
 
     let loadingIcon = document.getElementById('loading-icon');
@@ -36,6 +51,14 @@ async function affichage_articles(id) {
             <p>Date de publication :  ${art.articles[i].date}</p>`
         articles[0].appendChild(div)
     }
+
+    if(art.articles.length == 0){
+        let div = document.createElement("div");
+        div.classList.add("selectable");
+        div.innerHTML = `<h1>Aucun article trouvé</h1>`
+        articles[0].appendChild(div)
+    }
+
     let selectable = document.getElementsByClassName("selectable");
     for(let i = 0; i < selectable.length; i++){
         selectable[i].addEventListener("click", function () {
