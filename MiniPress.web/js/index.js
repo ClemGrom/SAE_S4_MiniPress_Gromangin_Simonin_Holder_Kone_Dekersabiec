@@ -7,12 +7,13 @@ document.addEventListener("DOMContentLoaded", event =>{
 
     let url = new URL(window.location.href);
     let id = url.searchParams.get("id");
-    let mot = url.searchParams.get("mot");
+    let mot = url.searchParams.get("mot")
+    let sort = url.searchParams.get("sort");
 
     if(location.includes("categories.html")){
         affichage_categories();
     }else if(location.includes("articles.html")) {
-        affichage_articles(id, mot);
+        affichage_articles(id, mot, sort);
     }else if (location.includes("lecture-article.html")) {
         affichage_article(id);
     }

@@ -17,7 +17,9 @@ async function getArticlesByMot(mot) {
     let art = await getArticles()
     let articles = {articles: []}
     for(let i = 0; i < art.articles.length; i++){
-        if(art.articles[i].titre.toLowerCase().includes(mot.toLowerCase())){
+        let article = await getArticleById(art.articles[i].id)
+        if(article.resume.toLowerCase().includes(mot.toLowerCase())
+            || art.articles[i].titre.toLowerCase().includes(mot.toLowerCase())){
             articles.articles.push(art.articles[i])
         }
     }
@@ -25,12 +27,22 @@ async function getArticlesByMot(mot) {
     return articles
 }
 
-async function affichage_articles(id, mot) {
+async function getArticlesSort(sort) {
+    window.history.pushState({}, document.title, "/html/" + "articles.html");
+    return load(api_link + "/articles?sort=date-" + sort)
+}
+
+async function affichage_articles(id, mot, sort) {
     let art;
     if(mot != null){
         art = await getArticlesByMot(mot)
+    }if(sort != null){
+        art = await getArticlesSort(sort)
     }else if(id == null) {
         art = await getArticles()
+        art.articles.sort(function(a, b){
+            return new Date(b.date) - new Date(a.date);
+        });
     }else {
         art = await getArticlesById(id)
     }
@@ -39,10 +51,6 @@ async function affichage_articles(id, mot) {
 
     let loadingIcon = document.getElementById('loading-icon');
     loadingIcon.style.display = 'none';
-
-    art.articles.sort(function(a, b){
-        return new Date(b.date) - new Date(a.date);
-    });
 
     for(let i = 0; i < art.articles.length; i++){
         let div = document.createElement("div");
