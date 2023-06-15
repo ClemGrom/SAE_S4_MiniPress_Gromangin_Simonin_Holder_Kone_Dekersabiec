@@ -1,15 +1,29 @@
 import {affichage_categories} from "./lib/categories.js";
 import {affichage_articles, affichage_article} from "./lib/articles.js";
 
-let location = window.location.href
+document.addEventListener("DOMContentLoaded", event =>{
 
-let url = new URL(window.location.href);
-let id = url.searchParams.get("id");
+    let location = window.location.href
 
-if(location.includes("categories.html")){
-    affichage_categories();
-}else if(location.includes("articles.html")) {
-    affichage_articles(id);
-}else if (location.includes("lecture-article.html")) {
-    affichage_article(id);
-}
+    let url = new URL(window.location.href);
+    let id = url.searchParams.get("id");
+    let mot = url.searchParams.get("mot");
+
+    if(location.includes("categories.html")){
+        affichage_categories();
+    }else if(location.includes("articles.html")) {
+        affichage_articles(id, mot);
+    }else if (location.includes("lecture-article.html")) {
+        affichage_article(id);
+    }
+
+    document.addEventListener("keydown", function (e) {
+        if(e.key == "Enter") {
+            let search = document.querySelector('.search input');
+            if(search.value != "") {
+                window.location.href = "articles.html?mot=" + search.value
+            }
+        }
+    })
+
+})
