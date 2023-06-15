@@ -1,3 +1,15 @@
+INSERT INTO `CATEGORIE` (`id`, `titre`, `description`)
+VALUES (1, 'Actualité',
+        "Informations complètes et à jour, compilées à partir de sources d'actualités du monde entier."),
+       (2, 'Evenements', 'Informations sur les evenements dans le grand est.'),
+       (3, 'Prévention', 'Attention, notre prévention vous vient en aide'),
+       (4, 'Cuisine', 'Découvrez des recettes délicieuses et des conseils culinaires.'),
+       (5, 'Santé et bien-être', 'Informations et conseils pour maintenir une bonne santé physique et mentale.'),
+       (6, 'Voyages', 'Inspiration et conseils pour vos prochaines aventures.'),
+       (7, 'Technologie', 'Actualités et nouveautés technologiques.'),
+       (8, 'Sport et fitness', 'Conseils, entraînements et actualités sportives pour rester en forme.');
+
+
 INSERT INTO `ARTICLE`(`id`, `titre`, `resume`, `contenu`, `date_crea`, `categ_id`)
 VALUES (1, 'Nouvelles découvertes en astronomie',
         'Des astronomes ont récemment fait une découverte majeure dans le domaine de l\'astronomie.', "Depuis des siècles, les astronomes scrutent le ciel à la recherche de nouvelles planètes et de nouveaux mondes. Récemment, une équipe d'astronomes a fait une avancée significative en découvrant une planète unique dans notre vaste univers : la planète Jules.
@@ -64,13 +76,3 @@ Prenez des pauses régulières: Si vous travaillez sur un ordinateur ou passez b
         'Découvrez les dernières tendances en matière de décoration pour créer un intérieur moderne et élégant.',
         'Le contenu de l\'article sur les tendances en matière de décoration intérieure...', '2023-06-05', 1);
 
-INSERT INTO `CATEGORIE` (`id`, `titre`, `description`)
-VALUES (1, 'Actualité',
-        "Informations complètes et à jour, compilées à partir de sources d'actualités du monde entier."),
-       (2, 'Evenements', 'Informations sur les evenements dans le grand est.'),
-       (3, 'Prévention', 'Attention, notre prévention vous vient en aide'),
-       (4, 'Cuisine', 'Découvrez des recettes délicieuses et des conseils culinaires.'),
-       (5, 'Santé et bien-être', 'Informations et conseils pour maintenir une bonne santé physique et mentale.'),
-       (6, 'Voyages', 'Inspiration et conseils pour vos prochaines aventures.'),
-       (7, 'Technologie', 'Actualités et nouveautés technologiques.'),
-       (8, 'Sport et fitness', 'Conseils, entraînements et actualités sportives pour rester en forme.');
