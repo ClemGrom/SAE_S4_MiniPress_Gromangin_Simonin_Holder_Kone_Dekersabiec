@@ -12,7 +12,7 @@ class ArticleServices
         return $articles->toArray();
     }
 
-    public function getArticle($id)
+    public function getArticleID($id)
     {
         $article = Article::find($id);
         return $article->toArray();

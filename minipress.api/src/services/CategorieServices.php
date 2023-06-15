@@ -12,7 +12,7 @@ class CategorieServices
         return $categories->toArray();
     }
 
-    public function getCategorie($id)
+    public function getCategorieID($id)
     {
         $categorie = Categorie::find($id);
         return $categorie->toArray();
