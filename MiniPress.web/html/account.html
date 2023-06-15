@@ -2,35 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet"   href="css/index.css">
+    <link rel="stylesheet"   href="../css/index.css">
+    <script src="../js/lib/account.js"></script>
     <title>MiniPress - Compte</title>
 </head>
 <body>
 
 <nav>
     <ul>
-        <li><a href="">Home</a></li>
-        <li><a href="html/categories.html">Categories</a></li>
-        <li><a href="html/articles.html">Articles</a></li>
-        <li><a href="html/account.html">Account</a></li>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="categories.html">Categories</a></li>
+        <li><a href="articles.html">Articles</a></li>
+        <li><a href="account.html">Account</a></li>
     </ul>
 </nav>
 
 <section id="account">
     <div id="connexion">
         <h2>Connexion</h2>
-        <form action="php/connexion.php" method="post">
+        <form id="connect">
             <label for="username">Nom d'utilisateur</label>
             <input type="text" name="username" id="username" placeholder="..." required>
             <label for="password">Mot de passe</label>
             <input type="password" name="password" id="password" placeholder="Mot de passe" required>
-            <input type="submit" value="Connexion">
+            <button id="submitConnect">Connexion</button>
         </form>
     </div>
 
-    <div id="createaccount">
+    <div id="creercompte">
         <h2>Créer un compte</h2>
-        <form action="php/createaccount.php" method="post">
+        <form id="createaccount">
             <label for="Cusername">Nom d'utilisateur</label>
             <input type="text" name="Cusername" id="Cusername" placeholder="..." required>
             <label for="Cemail">Email</label>
@@ -39,7 +40,7 @@
             <input type="password" name="Cpassword" id="Cpassword" placeholder="Mot de passe" required>
             <label for="password">Confirmer le mot de passe</label>
             <input type="CCpassword" name="CCpassword" id="CCpassword" placeholder="Mot de passe" required>
-            <input type="submit" value="Créer un compte">
+            <button id="submitCreateAccount">Valider et créer un compte</button>
         </form>
     </div>
 </section>
