@@ -14,9 +14,11 @@ class GetCategoriesApiAction
         $cs = new CategorieServices();
         $categories = $cs->getCategories();
 
-        $categories_api = [];
+        $categories_api = [
+            'categories' => [],
+        ];
         foreach ($categories as $categorie) {
-            $categories_api[] = [
+            $categories_api['categories'][] = [
                 'id' => $categorie['id'],
                 'titre' => $categorie['titre'],
                 'description' => $categorie['description'],
