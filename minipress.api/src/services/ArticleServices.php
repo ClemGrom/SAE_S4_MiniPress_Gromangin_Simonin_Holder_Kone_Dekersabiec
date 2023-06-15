@@ -8,14 +8,11 @@ class ArticleServices
 {
     public function getArticles()
     {
-        $articles = Article::all();
-        return $articles->toArray();
+        return Article::all()->toArray();
     }
 
     public function getArticleID($id)
     {
-        $article = Article::find($id);
-        return $article->toArray();
+        return Article::find($id)->toArray();
     }
-
 }
