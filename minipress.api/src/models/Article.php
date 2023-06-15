@@ -12,12 +12,17 @@ class Article extends Model
     public $timestamps = false;
     public $incrementing = true;
     public $keyType = 'string';
-    public $fillable = ['id', 'titre', 'resume', 'contenu', 'date_crea', 'created_at', 'updated_at'];
+    public $fillable = ['id', 'titre', 'resume', 'contenu', 'date_crea', 'categ_id', 'author_id'];
 
 
     public function categories(): BelongsTo
     {
         return $this->belongsTo(Categorie::class, 'cat_id');
+    }
+
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(Author::class, 'author_id');
     }
 
 }
