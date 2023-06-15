@@ -44,3 +44,12 @@ Prenez des pauses régulières: Si vous travaillez sur un ordinateur ou passez b
 (8, 'Les bienfaits de l\'exercice physique', 'Apprenez les nombreux avantages d\'une activité physique régulière pour la santé et le bien-être.', 'Le contenu de l\'article sur les bienfaits de l\'exercice physique...', '2023-06-07'),
 (9, 'Les dernières actualités économiques', 'Restez informé des derniers développements économiques et financiers à travers le monde.', 'Le contenu de l\'article sur les dernières actualités économiques...', '2023-06-06'),
 (10, 'Les tendances en matière de décoration intérieure', 'Découvrez les dernières tendances en matière de décoration pour créer un intérieur moderne et élégant.', 'Le contenu de l\'article sur les tendances en matière de décoration intérieure...', '2023-06-05');
+
+
+INSERT INTO CATEGORIE (id, titre, description) VALUES
+(4, 'Cuisine', 'Découvrez des recettes délicieuses et des conseils culinaires.'),
+(5, 'Santé et bien-être', 'Informations et conseils pour maintenir une bonne santé physique et mentale.'),
+(6, 'Voyages', 'Inspiration et conseils pour vos prochaines aventures.'),
+(7, 'Technologie', 'Actualités et nouveautés technologiques.'),
+(8, 'Sport et fitness', 'Conseils, entraînements et actualités sportives pour rester en forme.');
+
