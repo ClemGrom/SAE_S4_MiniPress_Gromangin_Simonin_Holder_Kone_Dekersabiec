@@ -1,23 +1,12 @@
-import {api_links} from "./api.js";
+import {api_link} from "./api_links.js"
 
-function loadArticle(id) {
-    const url = api_links + "/articles/" + id;
+function load(url) {
     return fetch(url)
         .then(response => response.json())
         .then(data => {
-            return data;
+            return data
         })
-        .catch(error => console.log(error));
+        .catch(error => console.log(error))
 }
 
-function loadAllArticles() {
-    const url = api_links + "/articles";
-    return fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            return data;
-        })
-        .catch(error => console.log(error));
-}
-
-export { loadArticle, loadAllArticles };
+export {load}
