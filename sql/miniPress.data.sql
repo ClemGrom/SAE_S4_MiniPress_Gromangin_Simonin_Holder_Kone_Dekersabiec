@@ -37,7 +37,7 @@ Si vous souhaitez adopter une approche plus audacieuse, osez le costume jogging 
 Il est important de noter que cette tendance du costume jogging tong est avant tout une expression de la liberté individuelle en matière de style. Elle encourage chacun à exprimer sa créativité et à repousser les conventions établies.
 
 En conclusion, le costume jogging tong est une tendance surprenante qui allie le confort du sportswear avec une touche d'élégance. Osez cette combinaison inattendue et créez votre propre style en jouant avec les contrastes. La mode est une forme d'expression personnelle, alors n'hésitez pas à explorer de nouvelles tendances et à vous amuser avec votre garde-robe.",
-        '2023-06-13', 1),
+        '2013-06-13', 1),
 
        (3, 'Conseils pour un mode de vie sain',
         'Découvrez des conseils simples pour maintenir un mode de vie sain et équilibré.', "Adoptez une alimentation équilibrée: Priviégiez une alimentation riche en fruits, légumes, grains entiers, protéines maigres et graisses saines. Évitez les aliments transformés et les excès de sucre, de sel et de matières grasses.
@@ -53,26 +53,26 @@ Dormez suffisamment: Accordez une importance à votre sommeil en visant environ 
 Limitez votre exposition aux substances nocives: Réduisez votre consommation de tabac, d'alcool et d'autres substances nocives pour votre santé. Évitez également l'exposition à la fumée secondaire et aux polluants environnementaux.
 
 Prenez des pauses régulières: Si vous travaillez sur un ordinateur ou passez beaucoup de temps assis, faites des pauses fréquentes pour vous étirer, bouger et reposer vos yeux.",
-        '2023-06-12', 2),
+        '1993-06-12', 2),
        (4, 'Les meilleures destinations de voyage',
         'Explorez les destinations de voyage les plus populaires et découvrez ce qu\'elles ont à offrir.',
-        'Le contenu de l\'article sur les meilleures destinations de voyage...', '2023-06-11', 2),
+        'Le contenu de l\'article sur les meilleures destinations de voyage...', '1983-06-11', 2),
        (5, 'Les nouvelles avancées technologiques',
         'Découvrez les dernières avancées technologiques qui façonnent notre avenir.',
-        'Le contenu de l\'article sur les nouvelles avancées technologiques...', '2023-06-10', 3),
+        'Le contenu de l\'article sur les nouvelles avancées technologiques...', '1973-06-10', 3),
        (6, 'Recettes faciles pour les amateurs de cuisine',
         'Découvrez des recettes simples et délicieuses pour les passionnés de cuisine.',
-        'Le contenu de l\'article sur les recettes faciles pour les amateurs de cuisine...', '2023-06-09', 3),
+        'Le contenu de l\'article sur les recettes faciles pour les amateurs de cuisine...', '1963-06-09', 3),
        (7, 'Les films les plus attendus de l\'année',
         'Découvrez les films les plus attendus qui sortiront prochainement au cinéma.',
-        'Le contenu de l\'article sur les films les plus attendus de l\'année...', '2023-06-08', 4),
+        'Le contenu de l\'article sur les films les plus attendus de l\'année...', '1953-06-08', 4),
        (8, 'Les bienfaits de l\'exercice physique',
         'Apprenez les nombreux avantages d\'une activité physique régulière pour la santé et le bien-être.',
-        'Le contenu de l\'article sur les bienfaits de l\'exercice physique...', '2023-06-07', 4),
+        'Le contenu de l\'article sur les bienfaits de l\'exercice physique...', '1943-06-07', 4),
        (9, 'Les dernières actualités économiques',
         'Restez informé des derniers développements économiques et financiers à travers le monde.',
-        'Le contenu de l\'article sur les dernières actualités économiques...', '2023-06-06', 3),
+        'Le contenu de l\'article sur les dernières actualités économiques...', '1933-06-06', 3),
        (10, 'Les tendances en matière de décoration intérieure',
         'Découvrez les dernières tendances en matière de décoration pour créer un intérieur moderne et élégant.',
-        'Le contenu de l\'article sur les tendances en matière de décoration intérieure...', '2023-06-05', 1);
+        'Le contenu de l\'article sur les tendances en matière de décoration intérieure...', '2033-06-05', 1);
 
