@@ -10,16 +10,20 @@ class GetArticlesApiAction
 {
     public function __invoke(ServerRequestInterface $rq, ResponseInterface $rs, array $args): ResponseInterface
     {
+
         $as = new ArticleServices();
         $articles = $as->getArticles();
 
-        $article_api = [];
+        $article_api = [
+            'articles' => [],
+        ];
+
         foreach ($articles as $article) {
-            $article_api[] = [
+            $article_api['articles'][] = [
                 'id' => $article['id'],
                 'titre' => $article['titre'],
                 'auteur' => $article['author_id'],
-                'date' => $article['date'],
+                'date' => $article['date_crea'],
                 'href' => '/articles/' . $article['id']
             ];
         }
