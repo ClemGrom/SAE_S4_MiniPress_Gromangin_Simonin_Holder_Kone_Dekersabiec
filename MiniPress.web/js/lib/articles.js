@@ -2,7 +2,7 @@ import {load} from "./loader.js"
 import {api_link} from "./api_links.js"
 
 function getArticles() {
-    return load(api_link+ "/articles")
+    return load(api_link+ "/articles?sort=date-desc")
 }
 
 function getArticlesById(id) {
@@ -40,9 +40,6 @@ async function affichage_articles(id, mot, sort) {
         art = await getArticlesSort(sort)
     }else if(id == null) {
         art = await getArticles()
-        art.articles.sort(function(a, b){
-            return new Date(b.date) - new Date(a.date);
-        });
     }else {
         art = await getArticlesById(id)
     }
