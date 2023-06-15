@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../screens/CategoriesPage.dart';
+import '../screens/HomePage.dart';
+import '../screens/ComptePage.dart';
 
 class MiniPress extends StatefulWidget {
   const MiniPress({Key? key}) : super(key: key);
@@ -12,9 +15,9 @@ class _MiniPressState extends State<MiniPress> {
 
   final List<Widget> _tabs = [
     // Contenu des différents onglets
-    HomePage(),
-    NewsPage(),
-    UserPage(),
+    const HomePage(),
+    // const CategoriesPage(),
+    const ComptePage(),
   ];
 
   @override
@@ -42,12 +45,16 @@ class _MiniPressState extends State<MiniPress> {
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.article),
-              label: 'News',
+              icon: Icon(Icons.category),
+              label: 'Categories',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Utilisateur',
+              icon: Icon(Icons.article),
+              label: 'Articles',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: 'Compte',
             ),
           ],
         ),
@@ -56,38 +63,6 @@ class _MiniPressState extends State<MiniPress> {
   }
 }
 
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text(
-        'Home Page',
-        style: TextStyle(fontSize: 24),
-      ),
-    );
-  }
-}
-
-class NewsPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text(
-        'News Page',
-        style: TextStyle(fontSize: 24),
-      ),
-    );
-  }
-}
-
-class UserPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text(
-        'User Page',
-        style: TextStyle(fontSize: 24),
-      ),
-    );
-  }
+void main() {
+  runApp(MiniPress());
 }

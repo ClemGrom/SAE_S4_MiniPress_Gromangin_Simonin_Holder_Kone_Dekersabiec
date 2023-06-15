@@ -1,0 +1,7 @@
+{
+  "name": "SAE_S4_MiniPress_Gromangin_Simonin_Holder_Kone_Dekersabiec",
+  "version": "1.0.0",
+  "dependencies": {
+    "bcryptjs": "^2.4.3"
+  }
+}

@@ -1,21 +1,33 @@
 <?php
 
-namespace minipress\api\action;
+namespace minipress\api\services;
 
 use minipress\api\models\Article;
 
-class GetCategoriesActionApi
+class ArticleServices
 {
-    public function getArticles()
+    public function getArticles($sort = null): array
     {
-        $articles = Article::all();
-        return $articles->toArray();
+        $a = Article::all()->toArray();
+        if ($sort == 'date-asc') {
+            usort($a, function ($a, $b) {
+                return $a['date_crea'] <=> $b['date_crea'];
+            });
+        } else if ($sort == 'date-desc') {
+            usort($a, function ($a, $b) {
+                return $a['date_crea'] <=> $b['date_crea'];
+            });
+            $a = array_reverse($a);
+        } else if ($sort == 'auteur') {
+            usort($a, function ($a, $b) {
+                return $a['auteur'] <=> $b['auteur'];
+            });
+        }
+        return $a;
     }
 
-    public function getArticle($id)
+    public function getArticleID($id)
     {
-        $article = Article::find($id);
-        return $article->toArray();
+        return Article::find($id)->toArray();
     }
-
 }

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet"   href="../css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>MiniPress</title>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="./categories.html">Categories</a></li>
+        <li><a href="">Articles</a></li>
+        <li><a href="./account.html">Account</a></li>
+    </ul>
+</nav>
+
+<div class="search">
+    <a href="./articles.html?sort=asc">Plus ancien</a>
+    <a href="./articles.html?sort=desc">Plus récent</a>
+    <input type="text" placeholder="Chercher un mot clé" value="">
+</div>
+
+<div class="articles">
+
+    <div id="loading-icon">
+        <i class="fas fa-spinner fa-spin fa-5x"></i>
+    </div>
+
+</div>
+
+<script type="module" src='../js/index.js' defer></script>
+
+</body>
+</html>
