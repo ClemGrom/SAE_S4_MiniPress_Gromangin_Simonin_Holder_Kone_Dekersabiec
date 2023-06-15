@@ -13,7 +13,7 @@ class GetArticleApiAction
         $as = new ArticleServices();
         $a = $as->getArticle($args['id']);
 
-        $article[] = [
+        $article = [
             'id' => $a['id'],
             'titre' => $a['titre'],
             'resume' => $a['resume'],
