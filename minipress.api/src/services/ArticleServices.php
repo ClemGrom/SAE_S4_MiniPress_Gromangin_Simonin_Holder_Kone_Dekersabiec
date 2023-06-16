@@ -20,7 +20,7 @@ class ArticleServices
             $a = array_reverse($a);
         } else if ($sort == 'auteur') {
             usort($a, function ($a, $b) {
-                return $a['auteur'] <=> $b['auteur'];
+                return $a['author_id'] <=> $b['author_id'];
             });
         }
         return $a;

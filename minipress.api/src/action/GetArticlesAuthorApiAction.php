@@ -20,7 +20,7 @@ class GetArticlesAuthorApiAction
             'articles' => []
         ];
 
-        $author_api['author'][] = [
+        $author_api['auteur'][] = [
             'id' => $a['id'],
             'email' => $a['email'],
             'username' => $a['username'],
@@ -31,7 +31,7 @@ class GetArticlesAuthorApiAction
                 'id' => $article['id'],
                 'titre' => $article['titre'],
                 'auteur' => $article['author_id'],
-                'date' => $article['date'],
+                'date' => $article['date_crea'],
                 'href' => '/articles/' . $article['id']
             ];
         }

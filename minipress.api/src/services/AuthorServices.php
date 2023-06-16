@@ -8,6 +8,6 @@ class AuthorServices
 {
     public function getAuthorID($id)
     {
-        return Author::find($id)->toArray();
+        return Author::find($id);
     }
 }
