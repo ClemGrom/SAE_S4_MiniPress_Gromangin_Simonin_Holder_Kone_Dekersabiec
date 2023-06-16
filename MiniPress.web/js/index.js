@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", event =>{
     let id = url.searchParams.get("id");
     let mot = url.searchParams.get("mot")
     let sort = url.searchParams.get("sort");
+    let auteur = url.searchParams.get("author");
 
     // On affiche les éléments en fonction de l'url
     if(location.includes("categories.html")){
@@ -21,7 +22,7 @@ document.addEventListener("DOMContentLoaded", event =>{
         affichage_categories();
     }else if(location.includes("articles.html")) {
         // On affiche les articles si on est sur la page des articles
-        affichage_articles(id, mot, sort);
+        affichage_articles(id, mot, sort, auteur);
     }else if (location.includes("lecture-article.html")) {
         // On affiche l'article si on est sur la page de l'article
         affichage_article(id);

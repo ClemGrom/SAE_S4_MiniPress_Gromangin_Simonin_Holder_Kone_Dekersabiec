@@ -17,7 +17,16 @@ function getAuteur(id) {
  * @return les articles
  */
 function getArticlesByAuteur(id) {
-    return load(api_link+ "/auteurs/" + id + "/articles")
+    // On retire les paramètres de l'url
+    window.history.pushState({}, document.title, "/html/" + "articles.html");
+    // Si l'id n'est pas null
+    if(id != "null"){
+        // On récupère les articles de l'auteur
+        return load(api_link+ "/auteurs/" + id + "/articles")
+    }else {
+        // Sinon on retourne un tableau vide
+        return {articles: []}
+    }
 }
 
 // Export

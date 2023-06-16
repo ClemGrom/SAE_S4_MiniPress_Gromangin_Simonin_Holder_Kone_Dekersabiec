@@ -16,12 +16,12 @@ async function affichage_categories() {
     // Pour chaque catégorie on crée un div avec les informations
     for (let i = 0; i < cat.categories.length; i++) {
         let div = document.createElement("div");
-        div.classList.add("selectable");
+        div.classList.add("categ");
         div.innerHTML = `<h1>${cat.categories[i].titre}</h1> <p>${cat.categories[i].description}</p>`
         categories[0].appendChild(div)
     }
     // On ajoute un évènement sur chaque catégorie pour rediriger vers la page de la catégorie
-    let selectable = document.getElementsByClassName("selectable");
+    let selectable = document.getElementsByClassName("categ");
     for (let i = 0; i < selectable.length; i++) {
         selectable[i].addEventListener("click", function () {
             window.location.href = "articles.html?id=" + cat.categories[i].id
