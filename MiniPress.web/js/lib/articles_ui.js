@@ -71,11 +71,18 @@ async function affichage_article(id) {
     let loadingIcon = document.getElementById('loading-icon');
     loadingIcon.style.display = 'none';
 
+    // On récupère l'auteur
+    let auteur = "Inconnu"
+    if(art.auteur != null) {
+        auteur = await getAuteur(art.auteur)
+        auteur = auteur.auteur
+    }
+
     // On crée un div avec les informations de l'article
     let article = document.getElementsByClassName("article");
     let div = document.createElement("div");
     div.classList.add("anArticle");
-    div.innerHTML = `<h1>${art.titre}</h1><br><p><b><U>Auteur :</U></b> ${art.auteur}</p>
+    div.innerHTML = `<h1>${art.titre}</h1><br><p><b><U>Auteur :</U></b> ${auteur}</p>
             <p><b><U>Date de publication :</U></b>  ${art.date}</p><br><p><b><U>Resumé :</U></b> ${art.resume}</p><br><p>${art.contenu}</p>`
     article[0].appendChild(div)
 }
