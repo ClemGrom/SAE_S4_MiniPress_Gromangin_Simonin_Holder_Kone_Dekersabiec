@@ -19,7 +19,11 @@ a {
     text-decoration: none;
     color: white;
     font-size: large;
-    padding-left: 150px;
+    /*padding-right: 150px;*/
+}
+
+.categBtn {
+    margin: 100px;
 }
 
 .selectable {
