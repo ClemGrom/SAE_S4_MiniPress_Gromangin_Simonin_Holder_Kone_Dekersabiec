@@ -20,7 +20,7 @@ class GetArticlesAuthorApiAction
             'articles' => []
         ];
 
-        $author_api['author'][] = [
+        $author_api['auteur'][] = [
             'id' => $a['id'],
             'email' => $a['email'],
             'username' => $a['username'],
