@@ -10,6 +10,7 @@ class GetArticlesCategoryApiAction
 {
     public function __invoke(ServerRequestInterface $rq, ResponseInterface $rs, array $args): ResponseInterface
     {
+
         $cs = new CategorieServices();
         $c = $cs->getCategorieID($args['id']);
         $articles = $c->articles()->get();
@@ -18,7 +19,6 @@ class GetArticlesCategoryApiAction
             'categorie' => [],
             'articles' => []
         ];
-
 
         $categorie_api['categorie'][] = [
             'id' => $c['id'],
