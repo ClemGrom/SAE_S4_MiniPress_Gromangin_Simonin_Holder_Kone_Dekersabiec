@@ -1,11 +1,12 @@
 <?php
 
-use minipress\api\action\GetArticleApiAction;
-use minipress\api\action\GetArticlesApiAction;
+use minipress\api\action\articles\GetArticleApiAction;
+use minipress\api\action\articles\GetArticlesApiAction;
+use minipress\api\action\authors\GetAuthorApiAction;
+use minipress\api\action\categories\GetCategorieApiAction;
+use minipress\api\action\categories\GetCategoriesApiAction;
 use minipress\api\action\GetArticlesAuthorApiAction;
 use minipress\api\action\GetArticlesCategoryApiAction;
-use minipress\api\action\GetAuthorApiAction;
-use minipress\api\action\GetCategoriesApiAction;
 use Slim\App;
 
 
@@ -22,4 +23,6 @@ return function (App $app): void {
     $app->get('/categories/{id}/articles', GetArticlesCategoryApiAction::class);
     //Liste des catégories
     $app->get('/categories', GetCategoriesApiAction::class);
+    //Catégorie complète
+    $app->get('/categories/{id}', GetCategorieApiAction::class);
 };

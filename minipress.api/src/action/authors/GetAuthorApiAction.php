@@ -1,6 +1,6 @@
 <?php
 
-namespace minipress\api\action;
+namespace minipress\api\action\authors;
 
 use minipress\api\services\AuthorServices;
 use Psr\Http\Message\ResponseInterface;
