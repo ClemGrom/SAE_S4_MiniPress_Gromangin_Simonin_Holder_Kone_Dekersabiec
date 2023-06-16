@@ -1,6 +1,6 @@
 <?php
 
-namespace minipress\api\action;
+namespace minipress\api\action\categories;
 
 use minipress\api\services\CategorieServices;
 use Psr\Http\Message\ResponseInterface;
