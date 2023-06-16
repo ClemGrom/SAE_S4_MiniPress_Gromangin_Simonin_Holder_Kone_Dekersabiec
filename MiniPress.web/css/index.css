@@ -19,15 +19,14 @@ a {
     text-decoration: none;
     color: white;
     font-size: large;
-    /*padding-right: 150px;*/
 }
 
 .categBtn {
     margin: 100px;
 }
 
-.selectable {
-    margin: 20px 300px 20px 300px;
+.contenu, .categories {
+    margin: 30px 200px 30px 200px;
     font-family: 'Segoe UI';
     font-size: large;
     text-align: center;
@@ -47,7 +46,7 @@ a {
     text-align: justify;
 }
 
-.selectable, .anArticle {
+.contenu, .anArticle, .categ {
     border: black 1px solid;
     border-radius: 30px;
     padding: 20px;
@@ -83,4 +82,26 @@ div > a{
     border-radius: 10px;
     background-color: #609191;
     font-size: large;
+}
+
+.contenu {
+    display: flex;
+    justify-content: center;
+}
+
+.author {
+    width: 20%;
+    margin-left: 50px;
+    /*background-color: chartreuse;*/
+
+}
+
+.selectable {
+    width: 80%;
+    /*background-color: cyan;*/
+}
+
+.categ {
+    margin: 30px;
+    text-align: center;
 }

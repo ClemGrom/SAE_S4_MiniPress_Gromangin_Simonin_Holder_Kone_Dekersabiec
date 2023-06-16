@@ -1,6 +1,7 @@
 // Import
 import{getArticles, getArticlesById, getArticlesByMot, getArticlesSort, getArticleById} from "./articles.js";
 import {getAuteur} from "./auteur.js";
+import {getArticlesByAuteur} from "./auteur.js";
 
 /*
  * Fonction qui affiche tous les articles
@@ -8,13 +9,15 @@ import {getAuteur} from "./auteur.js";
  * @param mot le mot à chercher si il y en a un
  * @param sort le type de tri si il y en a un
  */
-async function affichage_articles(id, mot, sort) {
+async function affichage_articles(id, mot, sort, auteur) {
     let art;
     // On récupère les articles
     if(mot != null){
         art = await getArticlesByMot(mot)
     }if(sort != null){
         art = await getArticlesSort(sort)
+    }else if(auteur != null) {
+        art = await getArticlesByAuteur(auteur)
     }else if(id == null) {
         art = await getArticles()
     }else {
@@ -35,17 +38,27 @@ async function affichage_articles(id, mot, sort) {
             auteur = auteur.auteur
         }
 
+        // Création du div avec les informations
+        let contenu = document.createElement("div");
+        contenu.classList.add("contenu");
         let div = document.createElement("div");
         div.classList.add("selectable");
-        div.innerHTML = `<h1>${art.articles[i].titre}</h1> <p>Auteur : ${auteur}</p>
+        div.innerHTML = `<h1>${art.articles[i].titre}</h1>
             <p>Date de publication :  ${art.articles[i].date}</p>`
-        articles[0].appendChild(div)
+        contenu.appendChild(div)
+
+        // Création du div avec l'auteur
+        let div2 = document.createElement("div");
+        div2.classList.add("author");
+        div2.innerHTML = `<p><strong>Auteur :</strong> ${auteur}</p>`
+        contenu.appendChild(div2)
+        articles[0].appendChild(contenu)
     }
 
     // Si il n'y a pas d'article on affiche un message d'erreur
     if(art.articles.length == 0){
         let div = document.createElement("div");
-        div.classList.add("selectable");
+        div.classList.add("categ");
         div.innerHTML = `<h1>Aucun article trouvé</h1>`
         articles[0].appendChild(div)
     }
@@ -55,6 +68,14 @@ async function affichage_articles(id, mot, sort) {
     for(let i = 0; i < selectable.length; i++){
         selectable[i].addEventListener("click", function () {
             window.location.href = "lecture-article.html?id=" + art.articles[i].id
+        })
+    }
+
+    // On ajoute un évènement sur l'auteur pour rediriger vers tous les articles de l'auteur
+    let author = document.getElementsByClassName("author");
+    for(let i = 0; i < author.length; i++){
+        author[i].addEventListener("click", function () {
+            window.location.href = "articles.html?author=" + art.articles[i].auteur
         })
     }
 }
