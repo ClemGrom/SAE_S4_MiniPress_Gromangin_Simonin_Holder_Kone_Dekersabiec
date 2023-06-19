@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
+import '../models/Categories.dart';
 
-class CategoriesPage extends StatefulWidget {
-  const CategoriesPage({ Key? key }) : super(key: key);
+class CategoriesPage extends StatelessWidget {
+  final Categories category;
 
-  @override
-  _CategoriesPageState createState() => _CategoriesPageState();
-}
+  const CategoriesPage({Key? key, required this.category}) : super(key: key);
 
-class _CategoriesPageState extends State<CategoriesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Categories Page'),
+        title: Text(category.titre),
       ),
       body: Container(
         padding: EdgeInsets.all(16.0),
@@ -21,12 +19,12 @@ class _CategoriesPageState extends State<CategoriesPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              'Welcome to the Categories Page',
+              category.titre,
               style: TextStyle(fontSize: 24),
             ),
             SizedBox(height: 16.0),
             Text(
-              'Add your category content here',
+              category.description,
               style: TextStyle(fontSize: 18),
             ),
           ],
