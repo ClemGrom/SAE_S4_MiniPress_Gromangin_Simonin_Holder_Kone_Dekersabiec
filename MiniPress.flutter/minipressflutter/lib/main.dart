@@ -22,13 +22,13 @@ class _MyAppState extends State<MiniPress> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Fetch Data Example',
+      title: 'MiniPress',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.pink,
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Fetch Data Example'),
+          title: const Text('MiniPress'),
         ),
         body: Center(
           child: FutureBuilder<Categories>(
