@@ -1,33 +1,64 @@
 import 'package:flutter/material.dart';
-import '../models/Categories.dart';
+import 'package:minipressflutter/models/categories.dart';
 
-class CategoriesPage extends StatelessWidget {
-  final Categories category;
+class CategoriesPage extends StatefulWidget {
+  const CategoriesPage({Key? key}) : super(key: key);
 
-  const CategoriesPage({Key? key, required this.category}) : super(key: key);
+  @override
+  _CategoriesPageState createState() => _CategoriesPageState();
+}
+
+class _CategoriesPageState extends State<CategoriesPage> {
+  late Future<List<Categories>> futureCategories;
+
+  @override
+  void initState() {
+    super.initState();
+    futureCategories = fetchCategories();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(category.titre),
+    return MaterialApp(
+      title: 'MiniPress',
+      theme: ThemeData(
+        primarySwatch: Colors.pink,
       ),
-      body: Container(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              category.titre,
-              style: TextStyle(fontSize: 24),
-            ),
-            SizedBox(height: 16.0),
-            Text(
-              category.description,
-              style: TextStyle(fontSize: 18),
-            ),
-          ],
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('MiniPress'),
+        ),
+        body: Center(
+          child: FutureBuilder<List<Categories>>(
+            future: futureCategories,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return ListView.builder(
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (context, index) {
+                    final category = snapshot.data![index];
+                    return ListTile(
+                      title: Text(
+                        'Catégorie : ' +
+                            category.titre +
+                            '\n' +
+                            category.description,
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.pink,
+                        ),
+                      ),
+                    );
+                  },
+                );
+              } else if (snapshot.hasError) {
+                return Text('${snapshot.error}');
+              }
+
+              return const CircularProgressIndicator();
+            },
+          ),
         ),
       ),
     );

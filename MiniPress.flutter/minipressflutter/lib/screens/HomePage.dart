@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:minipressflutter/screens/ArticlesPage.dart';
+import 'package:minipressflutter/screens/CategoriesPage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -10,27 +12,22 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Home Page'),
-      ),
-      body: Container(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              'Welcome to the Home Page',
-              style: TextStyle(fontSize: 24),
-            ),
-            SizedBox(height: 16.0),
-            Text(
-              'Add your home content here',
-              style: TextStyle(fontSize: 18),
-            ),
-          ],
-        ),
+    return Container(
+      padding: EdgeInsets.all(16.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            'Bienvenue sur la page d\'accueil de MiniPress',
+            style: TextStyle(fontSize: 24),
+          ),
+          SizedBox(height: 16.0),
+          Text(
+            'Visialisez les articles ou les catégories',
+            style: TextStyle(fontSize: 18),
+          ),
+        ],
       ),
     );
   }
