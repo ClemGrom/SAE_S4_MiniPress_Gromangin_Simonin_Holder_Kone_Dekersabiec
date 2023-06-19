@@ -10,4 +10,14 @@ class AuthorServices
     {
         return Author::find($id);
     }
+
+    public function isAdmin($id)
+    {
+        $a = Author::find($id);
+        if ($a['user_status'] == '3') {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
