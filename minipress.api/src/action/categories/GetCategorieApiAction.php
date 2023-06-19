@@ -21,7 +21,7 @@ class GetCategorieApiAction
 
         $rs->getBody()->write(json_encode($categories_api));
         return $rs
-            ->withHeader('Access-Control-Allow-Origin', 'http://localhost:20004')
+            ->withHeader('Access-Control-Allow-Origin', '*')
             ->withHeader('Content-Type', 'application/json')
             ->withStatus(200);
 

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 Future<Categories> fetchCategories() async {
   final response =
-      await http.get(Uri.parse('http://localhost:20003/api/categories'));
+      await http.get(Uri.parse('http://localhost:20003/api/categories/1'));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
@@ -26,10 +26,11 @@ class Categories {
       {required this.id, required this.titre, required this.description});
 
   factory Categories.fromJson(Map<String, dynamic> json) {
+    Map<String, dynamic> data = json['categories'][0];
     return Categories(
-      id: json['id'] as String,
-      titre: json['titre'] as String,
-      description: json['description'] as String,
+      id: data['id'] as String,
+      titre: data['titre'] as String,
+      description: data['description'] as String,
     );
   }
 }

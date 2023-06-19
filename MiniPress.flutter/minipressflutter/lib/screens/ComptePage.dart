@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:minipressflutter/models/categories.dart';
 
 class ComptePage extends StatefulWidget {
   const ComptePage({Key? key}) : super(key: key);
@@ -15,7 +14,6 @@ class _ComptePageState extends State<ComptePage> {
       appBar: AppBar(
         title: Text('Compte Page'),
       ),
-    
       body: Container(
         padding: EdgeInsets.all(16.0),
         child: Column(
