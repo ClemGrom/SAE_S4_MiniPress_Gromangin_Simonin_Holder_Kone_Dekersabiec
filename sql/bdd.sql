@@ -59,7 +59,7 @@ INSERT INTO `ARTICLE` (`id`, `titre`, `resume`, `contenu`, `date_crea`, `categ_i
 -- Structure de la table `CATEGORIE`
 --
 
-CREATE TABLE `CATEGORIE` (
+CREATE TABLE `categorie` (
   `id` int NOT NULL,
   `titre` varchar(50) DEFAULT NULL,
   `description` text
@@ -69,7 +69,7 @@ CREATE TABLE `CATEGORIE` (
 -- Déchargement des données de la table `CATEGORIE`
 --
 
-INSERT INTO `CATEGORIE` (`id`, `titre`, `description`) VALUES
+INSERT INTO `categorie` (`id`, `titre`, `description`) VALUES
 (1, 'Actualité', 'Informations complètes et à jour, compilées à partir de sources d\'actualités du monde entier.'),
 (2, 'Evenements', 'Informations sur les evenements dans le grand est.'),
 (3, 'Prévention', 'Attention, notre prévention vous vient en aide'),
@@ -154,7 +154,7 @@ ALTER TABLE `ARTICLE`
 --
 -- Index pour la table `CATEGORIE`
 --
-ALTER TABLE `CATEGORIE`
+ALTER TABLE `categorie`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -191,7 +191,7 @@ ALTER TABLE `ARTICLE`
 --
 -- AUTO_INCREMENT pour la table `CATEGORIE`
 --
-ALTER TABLE `CATEGORIE`
+ALTER TABLE `categorie`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
@@ -214,14 +214,14 @@ ALTER TABLE `UTILISATEUR`
 -- Contraintes pour la table `ARTICLE`
 --
 ALTER TABLE `ARTICLE`
-  ADD CONSTRAINT `article_ibfk_1` FOREIGN KEY (`categ_id`) REFERENCES `CATEGORIE` (`id`),
+  ADD CONSTRAINT `article_ibfk_1` FOREIGN KEY (`categ_id`) REFERENCES `categorie` (`id`),
   ADD CONSTRAINT `article_ibfk_2` FOREIGN KEY (`author_id`) REFERENCES `UTILISATEUR` (`id`);
 
 --
 -- Contraintes pour la table `IMAGE`
 --
 ALTER TABLE `IMAGE`
-  ADD CONSTRAINT `image_ibfk_1` FOREIGN KEY (`categ_id`) REFERENCES `CATEGORIE` (`id`),
+  ADD CONSTRAINT `image_ibfk_1` FOREIGN KEY (`categ_id`) REFERENCES `categorie` (`id`),
   ADD CONSTRAINT `image_ibfk_2` FOREIGN KEY (`author_id`) REFERENCES `UTILISATEUR` (`id`);
 
 --
