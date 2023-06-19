@@ -1,0 +1,21 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+
+<div id="creercompte">
+    <h2>Créer un compte</h2>
+    <form id="createaccount">
+        <label for="Cusername">Nom d'utilisateur</label>
+        <input type="text" name="Cusername" id="Cusername" placeholder="..." required>
+        <label for="Cemail">Email</label>
+        <input type="email" name="Cemail" id="Cemail" placeholder="..." required>
+        <label for="Cpassword">Mot de passe</label>
+        <input type="password" name="Cpassword" id="Cpassword" placeholder="Mot de passe" required>
+        <label for="password">Confirmer le mot de passe</label>
+        <input type="CCpassword" name="CCpassword" id="CCpassword" placeholder="Mot de passe" required>
+        <button id="submitCreateAccount">Valider et créer un compte</button>
+    </form>
+    <p>Erreur test save</p>
+</div>
+
+{% endblock %}
