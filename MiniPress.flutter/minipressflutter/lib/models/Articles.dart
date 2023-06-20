@@ -38,14 +38,9 @@ Future<List<Articles>> fetchArticles() async {
       await http.get(Uri.parse('http://localhost:20003/api/articles'));
 
   if (response.statusCode == 200) {
-    // final Map<String, dynamic> jsonData = jsonDecode(response.body);
     final Map<String, dynamic> data = jsonDecode(response.body);
     List<dynamic> res = [];
     for (int i = 0; i < data['articles'].length; i++) {
-      // final articleInfo = await http.get(Uri.parse(
-      //     'http://localhost:20003/api' + jsonData['articles'][i]['href']));
-      // final Map<String, dynamic> data = jsonDecode(articleInfo.body);
-      print(data['articles'][i]['auteur']);
       if (data['articles'][i]['auteur'] == null) {
         data['articles'][i]['auteur'] = "Inconnu";
       } else {
@@ -65,5 +60,58 @@ Future<List<Articles>> fetchArticles() async {
     return res.map((json) => Articles.fromJson(json)).toList();
   } else {
     throw Exception('Failed to load Articles');
+  }
+}
+
+Future<List<Articles>> fetchArticlesByCategories(String categID) async {
+  final response = await http.get(Uri.parse(
+      'http://localhost:20003/api/categories/' + categID + '/articles'));
+
+  if (response.statusCode == 200) {
+    final Map<String, dynamic> data = jsonDecode(response.body);
+    List<dynamic> res = [];
+    print(data['articles']);
+    for (int i = 0; i < data['articles'].length; i++) {
+      if (data['articles'][i]['auteur'] == null) {
+        data['articles'][i]['auteur'] = "Inconnu";
+      } else {
+        final auteurInfo = await http.get(Uri.parse(
+            'http://localhost:20003/api/auteurs/' +
+                data['articles'][i]['auteur'].toString()));
+        final Map<String, dynamic> dataAutor = jsonDecode(auteurInfo.body);
+        data['articles'][i]['auteur'] = dataAutor['auteur'];
+      }
+
+      data['articles'][i]['resume'] = "";
+      data['articles'][i]['contenu'] = "";
+      data['articles'][i]['categorie'] = 0;
+      print(data['articles'][i]);
+      res.add(data['articles'][i]);
+    }
+    print("end");
+    return res.map((json) => Articles.fromJson(json)).toList();
+  } else {
+    throw Exception('Failed to load Articles');
+  }
+}
+
+Future<Articles> fetchArticleByID(String id) async {
+  final response =
+      await http.get(Uri.parse('http://localhost:20003/api/articles/' + id));
+
+  if (response.statusCode == 200) {
+    final Map<String, dynamic> data = jsonDecode(response.body);
+    if (data['auteur'] == null) {
+      data['auteur'] = "Inconnu";
+    } else {
+      final auteurInfo = await http.get(Uri.parse(
+          'http://localhost:20003/api/auteurs/' + data['auteur'].toString()));
+      final Map<String, dynamic> dataAutor = jsonDecode(auteurInfo.body);
+      data['auteur'] = dataAutor['auteur'];
+    }
+
+    return Articles.fromJson(data);
+  } else {
+    throw Exception('Failed to load Article');
   }
 }

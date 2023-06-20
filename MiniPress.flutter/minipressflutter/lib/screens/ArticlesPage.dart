@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minipressflutter/models/Articles.dart';
+import 'package:minipressflutter/screens/ArticleDetails.dart';
 
 class ArticlesPage extends StatefulWidget {
   const ArticlesPage({Key? key}) : super(key: key);
@@ -29,16 +30,46 @@ class _ArticlesPageState extends State<ArticlesPage> {
           title: const Text('MiniPress'),
         ),
         body: Center(
-          child: FutureBuilder<List<Articles>>(
+            child: Scaffold(
+          body: FutureBuilder<List<Articles>>(
             future: futureArticles,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
+                // return ListView.builder(
+                //   itemCount: snapshot.data!.length,
+                //   itemBuilder: (context, index) {
+                //     final article = snapshot.data![index];
+                //     return ListTile(
+                //       title: Text(
+                //         article.titre +
+                //             '\n' +
+                //             article.date_crea +
+                //             "  -  " +
+                //             article.author,
+                //         style: const TextStyle(
+                //           fontSize: 16.0,
+                //           fontWeight: FontWeight.bold,
+                //           color: Colors.pink,
+                //         ),
+                //       ),
+                //     );
+                //   },
+                // );
                 return ListView.builder(
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
                     final article = snapshot.data![index];
-                    return ListTile(
-                      title: Text(
+                    return ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                ArticleDetailPage(article: article),
+                          ),
+                        );
+                      },
+                      child: Text(
                         article.titre +
                             '\n' +
                             article.date_crea +
@@ -47,7 +78,7 @@ class _ArticlesPageState extends State<ArticlesPage> {
                         style: const TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
-                          color: Colors.pink,
+                          color: Colors.white,
                         ),
                       ),
                     );
@@ -60,7 +91,7 @@ class _ArticlesPageState extends State<ArticlesPage> {
               return const CircularProgressIndicator();
             },
           ),
-        ),
+        )),
       ),
     );
   }
