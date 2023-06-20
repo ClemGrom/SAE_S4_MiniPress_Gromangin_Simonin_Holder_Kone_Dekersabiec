@@ -25,6 +25,4 @@ return function (App $app): void {
     $app->get('/categories', GetCategoriesApiAction::class);
     //Catégorie complète
     $app->get('/categories/{id}', GetCategorieApiAction::class);
-    //Gestion utilisateurs
-    $app->get('/utilisateurs', CreateUserApiAction::class);
 };
