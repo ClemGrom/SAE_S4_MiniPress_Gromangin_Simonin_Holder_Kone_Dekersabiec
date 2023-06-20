@@ -10,13 +10,13 @@ class GetAuthorApiAction
 {
     public function __invoke(ServerRequestInterface $rq, ResponseInterface $rs, array $args): ResponseInterface
     {
-        $as= new AuthorServices();
+        $as = new AuthorServices();
         $a = $as->getAuthorID($args['id']);
 
         $author_api = [
-            'id'=>$a['id'],
+            'id' => $a['id'],
             'auteur' => $a['username'],
-            'email'=>$a['email']
+            'email' => $a['email']
         ];
 
         $rs->getBody()->write(json_encode($author_api));

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MiniPress</title>
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-areas:
+            'header header header'
+            'nav main main'
+            'footer footer footer';
+            grid-gap: 10px;
+            padding: 10px;
+        }
+
+        .header, .footer {
+            grid-area: auto;
+            background-color: #cccccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .nav {
+            grid-area: nav;
+            background-color: #dddddd;
+            padding: 10px;
+        }
+
+        .main {
+            grid-area: main;
+            background-color: #eeeeee;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body class="grid-container">
+<header class="header">
+    <!-- En-tête de l'application -->
+</header>
+
+<nav class="nav">
+    <!-- Barre de navigation de l'application -->
+</nav>
+
+<main class="main">
+    {% block body %}{% endblock %}
+</main>
+
+<footer class="footer">
+    <!-- Pied de page de l'application -->
+</footer>
+</body>
+</html>

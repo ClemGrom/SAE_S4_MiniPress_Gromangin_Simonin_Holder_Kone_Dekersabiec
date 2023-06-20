@@ -115,3 +115,37 @@ Future<Articles> fetchArticleByID(String id) async {
     throw Exception('Failed to load Article');
   }
 }
+
+Future<List<Articles>> fetchArticlesBySearch(String word) async {
+  final response =
+      await http.get(Uri.parse('http://localhost:20003/api/articles'));
+
+  if (response.statusCode == 200) {
+    final Map<String, dynamic> data = jsonDecode(response.body);
+    List<dynamic> res = [];
+    for (int i = 0; i < data['articles'].length; i++) {
+      if (data['articles'][i]['auteur'] == null) {
+        data['articles'][i]['auteur'] = "Inconnu";
+      } else {
+        final auteurInfo = await http.get(Uri.parse(
+            'http://localhost:20003/api/auteurs/' +
+                data['articles'][i]['auteur'].toString()));
+        final Map<String, dynamic> dataAutor = jsonDecode(auteurInfo.body);
+        data['articles'][i]['auteur'] = dataAutor['auteur'];
+      }
+
+      data['articles'][i]['resume'] = "";
+      data['articles'][i]['contenu'] = "";
+      data['articles'][i]['categorie'] = 0;
+
+      // ajouter que si le mot est dans le titre ou le resume
+      if (data['articles'][i]['titre'].toString().contains(word) ||
+          data['articles'][i]['resume'].toString().contains(word)) {
+        res.add(data['articles'][i]);
+      }
+    }
+    return res.map((json) => Articles.fromJson(json)).toList();
+  } else {
+    throw Exception('Failed to load Articles');
+  }
+}
