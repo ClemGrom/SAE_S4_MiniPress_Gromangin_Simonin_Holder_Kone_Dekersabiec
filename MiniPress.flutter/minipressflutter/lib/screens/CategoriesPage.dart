@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minipressflutter/models/categories.dart';
+import 'CategoriesDetailsPages.dart';
 
 class CategoriesPage extends StatefulWidget {
   const CategoriesPage({Key? key}) : super(key: key);
@@ -37,8 +38,17 @@ class _CategoriesPageState extends State<CategoriesPage> {
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
                     final category = snapshot.data![index];
-                    return ListTile(
-                      title: Text(
+                    return ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                CategoryDetailsPage(category: category),
+                          ),
+                        );
+                      },
+                      child: Text(
                         'Catégorie : ' +
                             category.titre +
                             '\n' +
@@ -46,7 +56,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                         style: const TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
-                          color: Colors.pink,
+                          color: Colors.white,
                         ),
                       ),
                     );
