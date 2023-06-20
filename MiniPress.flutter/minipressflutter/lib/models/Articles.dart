@@ -9,7 +9,7 @@ class Articles {
   final String contenu;
   final String date_crea;
   final int categ_id;
-  final int author_id;
+  final String author;
 
   const Articles(
       {required this.id,
@@ -18,7 +18,7 @@ class Articles {
       required this.contenu,
       required this.date_crea,
       required this.categ_id,
-      required this.author_id});
+      required this.author});
 
   factory Articles.fromJson(Map<String, dynamic> json) {
     return Articles(
@@ -28,7 +28,7 @@ class Articles {
       contenu: json['contenu'] as String,
       date_crea: json['date'] as String,
       categ_id: json['categorie'] as int,
-      author_id: json['auteur'] as int,
+      author: json['auteur'] as String,
     );
   }
 }
@@ -38,17 +38,29 @@ Future<List<Articles>> fetchArticles() async {
       await http.get(Uri.parse('http://localhost:20003/api/articles'));
 
   if (response.statusCode == 200) {
-    final Map<String, dynamic> jsonData = jsonDecode(response.body);
-    final List<dynamic> articlesData = jsonData['articles'];
+    // final Map<String, dynamic> jsonData = jsonDecode(response.body);
+    final Map<String, dynamic> data = jsonDecode(response.body);
     List<dynamic> res = [];
-    for (int i = 0; i < jsonData['articles'].length; i++) {
-      final articleInfo = await http.get(Uri.parse(
-          'http://localhost:20003/api' + jsonData['articles'][i]['href']));
-      final Map<String, dynamic> data = jsonDecode(articleInfo.body);
-      if (data['auteur'] == null) {
-        data['auteur'] = 0;
+    for (int i = 0; i < data['articles'].length; i++) {
+      // final articleInfo = await http.get(Uri.parse(
+      //     'http://localhost:20003/api' + jsonData['articles'][i]['href']));
+      // final Map<String, dynamic> data = jsonDecode(articleInfo.body);
+      print(data['articles'][i]['auteur']);
+      if (data['articles'][i]['auteur'] == null) {
+        data['articles'][i]['auteur'] = "Inconnu";
+      } else {
+        final auteurInfo = await http.get(Uri.parse(
+            'http://localhost:20003/api/auteurs/' +
+                data['articles'][i]['auteur'].toString()));
+        final Map<String, dynamic> dataAutor = jsonDecode(auteurInfo.body);
+        data['articles'][i]['auteur'] = dataAutor['auteur'];
       }
-      res.add(data);
+
+      data['articles'][i]['resume'] = "";
+      data['articles'][i]['contenu'] = "";
+      data['articles'][i]['categorie'] = 0;
+
+      res.add(data['articles'][i]);
     }
     return res.map((json) => Articles.fromJson(json)).toList();
   } else {

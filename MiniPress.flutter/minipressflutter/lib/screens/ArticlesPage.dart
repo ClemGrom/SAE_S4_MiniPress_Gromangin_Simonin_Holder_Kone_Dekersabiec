@@ -39,7 +39,11 @@ class _ArticlesPageState extends State<ArticlesPage> {
                     final article = snapshot.data![index];
                     return ListTile(
                       title: Text(
-                        article.titre + '\n' + article.date_crea,
+                        article.titre +
+                            '\n' +
+                            article.date_crea +
+                            "  -  " +
+                            article.author,
                         style: const TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
