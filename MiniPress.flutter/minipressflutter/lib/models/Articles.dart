@@ -41,7 +41,6 @@ Future<List<Articles>> fetchArticles() async {
     final Map<String, dynamic> jsonData = jsonDecode(response.body);
     final List<dynamic> articlesData = jsonData['articles'];
     List<dynamic> res = [];
-    print(jsonData['articles'].length);
     for (int i = 0; i < jsonData['articles'].length; i++) {
       final articleInfo = await http.get(Uri.parse(
           'http://localhost:20003/api' + jsonData['articles'][i]['href']));
@@ -51,10 +50,6 @@ Future<List<Articles>> fetchArticles() async {
       }
       res.add(data);
     }
-    res.forEach((elem) {
-      print(elem['date']);
-    });
-    print(res.length);
     return res.map((json) => Articles.fromJson(json)).toList();
   } else {
     throw Exception('Failed to load Articles');

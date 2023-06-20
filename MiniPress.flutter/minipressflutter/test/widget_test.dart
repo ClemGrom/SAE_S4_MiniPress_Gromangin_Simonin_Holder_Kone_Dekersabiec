@@ -8,12 +8,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:minipressflutter/main2.dart';
+import 'package:minipressflutter/main.dart';
+import 'package:minipressflutter/screens/MiniPress.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(const MiniPress());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
