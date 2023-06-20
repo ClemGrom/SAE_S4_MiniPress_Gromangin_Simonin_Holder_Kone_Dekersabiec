@@ -12,7 +12,7 @@ $app->addErrorMiddleware(true,false,false);
 
 Eloquent::init(__DIR__.'/conf.ini');
 
-$twig = Twig::create(__DIR__.'/../template/');
+$twig = Twig::create(__DIR__ . '/../templates/');
 $app->add(TwigMiddleware::create($app, $twig)) ;
 $twig->getEnvironment()->addGlobal('basePath', $app->getBasePath());
 
