@@ -4,10 +4,11 @@ namespace minipress\api\action\categories;
 
 use minipress\api\services\CategorieServices;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 class GetCategorieApiAction
 {
-    public function __invoke(ResponseInterface $rs, array $args): ResponseInterface
+    public function __invoke(ServerRequestInterface $rq, ResponseInterface $rs, array $args): ResponseInterface
     {
         $cs = new CategorieServices();
         $c = $cs->getCategorieID($args['id']);

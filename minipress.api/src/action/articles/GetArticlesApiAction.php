@@ -4,10 +4,11 @@ namespace minipress\api\action\articles;
 
 use minipress\api\services\ArticleServices;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 class GetArticlesApiAction
 {
-    public function __invoke(ResponseInterface $rs, array $args): ResponseInterface
+    public function __invoke(ServerRequestInterface $rq, ResponseInterface $rs, array $args): ResponseInterface
     {
 
         $as = new ArticleServices();
