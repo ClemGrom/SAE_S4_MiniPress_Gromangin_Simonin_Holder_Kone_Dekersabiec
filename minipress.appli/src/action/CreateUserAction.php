@@ -1,8 +1,8 @@
 <?php
 
-namespace minpress\api\action;
+namespace minpress\appli\action;
 
-use minipress\api\services\AuthorServices;
+use minipress\appli\services\AuthorServices;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -12,14 +12,13 @@ class CreateUserAction {
         $as = new AuthorServices();
         $a = $as->isAdmin($args['id']);
 
-        if ($a == false) {
+        if (!$a) {
             throw new UnsufficientRightsException('Vous n\'avez pas les droits pour créer un utilisateur');
         } else {
-            $rs->getBody()->write(json_encode($as->getAuthorID($args['id'])));
-            return $rs
-                ->withHeader('Access-Control-Allow-Origin', '*')
-                ->withHeader('Content-Type', 'application/json')
-                ->withStatus(200);
+            return Twig::fromRequest($rq)->render($rs, 'Connect.twig', [
+                'author' => $as->getAuthorID($args['id'])
+            ]);
+
         }
 
     }
