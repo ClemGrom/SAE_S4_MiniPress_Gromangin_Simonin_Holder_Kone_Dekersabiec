@@ -1,33 +1,33 @@
 <?php
 
-namespace minipress\api\action;
+namespace minipress\api\action\articles;
 
-use minipress\api\services\CategorieServices;
+use minipress\api\services\AuthorServices;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-class GetArticlesCategoryApiAction
+class GetArticlesAuthorApiAction
 {
     public function __invoke(ServerRequestInterface $rq, ResponseInterface $rs, array $args): ResponseInterface
     {
 
-        $cs = new CategorieServices();
-        $c = $cs->getCategorieID($args['id']);
-        $articles = $c->articles()->get();
+        $as = new AuthorServices();
+        $a = $as->getAuthorID($args['id']);
+        $articles = $a->articles()->get();
 
-        $categorie_api = [
-            'categorie' => [],
+        $author_api = [
+            'auteur' => [],
             'articles' => []
         ];
 
-        $categorie_api['categorie'][] = [
-            'id' => $c['id'],
-            'titre' => $c['titre'],
-            'description' => $c['description'],
+        $author_api['auteur'][] = [
+            'id' => $a['id'],
+            'email' => $a['email'],
+            'username' => $a['username'],
         ];
 
         foreach ($articles as $article) {
-            $categorie_api['articles'][] = [
+            $author_api['articles'][] = [
                 'id' => $article['id'],
                 'titre' => $article['titre'],
                 'auteur' => $article['author_id'],
@@ -37,7 +37,7 @@ class GetArticlesCategoryApiAction
         }
 
 
-        $rs->getBody()->write(json_encode($categorie_api));
+        $rs->getBody()->write(json_encode($author_api));
         return $rs
             ->withHeader('Access-Control-Allow-Origin', '*')
             ->withHeader('Content-Type', 'application/json')

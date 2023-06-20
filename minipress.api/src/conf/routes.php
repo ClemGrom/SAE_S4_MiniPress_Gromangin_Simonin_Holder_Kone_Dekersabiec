@@ -2,11 +2,11 @@
 
 use minipress\api\action\articles\GetArticleApiAction;
 use minipress\api\action\articles\GetArticlesApiAction;
+use minipress\api\action\articles\GetArticlesAuthorApiAction;
+use minipress\api\action\articles\GetArticlesCategoryApiAction;
 use minipress\api\action\authors\GetAuthorApiAction;
 use minipress\api\action\categories\GetCategorieApiAction;
 use minipress\api\action\categories\GetCategoriesApiAction;
-use minipress\api\action\GetArticlesAuthorApiAction;
-use minipress\api\action\GetArticlesCategoryApiAction;
 use Slim\App;
 
 
