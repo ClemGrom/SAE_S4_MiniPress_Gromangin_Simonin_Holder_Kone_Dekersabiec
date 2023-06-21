@@ -99,6 +99,9 @@ async function affichage_article(id) {
         auteur = auteur.auteur
     }
 
+    let converter = new showdown.Converter();
+    art.contenu = converter.makeHtml(art.contenu);
+
     // On crée un div avec les informations de l'article
     let article = document.getElementsByClassName("article");
     let div = document.createElement("div");
