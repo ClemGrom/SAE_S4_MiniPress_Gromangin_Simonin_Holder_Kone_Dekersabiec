@@ -87,7 +87,7 @@ INSERT INTO `categorie` (`id`, `titre`, `description`) VALUES
 
 CREATE TABLE `image` (
   `id` int NOT NULL,
-  `url` int NOT NULL
+  `url` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
