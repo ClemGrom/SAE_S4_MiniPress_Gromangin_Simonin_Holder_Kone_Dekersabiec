@@ -1,0 +1,15 @@
+{% extends 'Layout.twig' %}
+
+{% block content %}
+    <h2>Liste des articles</h2>
+
+    {% if articles is not empty %}
+        <ul>
+            {% for article in articles %}
+                <li>{{ article.titre }} - {{ article.date_crea|date('d/m/Y') }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucun article trouvé.</p>
+    {% endif %}
+{% endblock %}
