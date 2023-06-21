@@ -23,6 +23,7 @@ class _ArticleAffichagePageState extends State<ArticleAffichagePage> {
       theme: ThemeData(
         primarySwatch: Colors.pink,
       ),
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: Container(
@@ -114,6 +115,19 @@ class _ArticleAffichagePageState extends State<ArticleAffichagePage> {
 
               return const CircularProgressIndicator();
             },
+          ),
+        ),
+        bottomNavigationBar: BottomAppBar(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
           ),
         ),
       ),

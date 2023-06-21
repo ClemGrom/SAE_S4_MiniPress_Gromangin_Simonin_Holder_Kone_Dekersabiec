@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:minipressflutter/models/Articles.dart';
 
 class ArticleDetailPage extends StatefulWidget {
@@ -26,6 +25,7 @@ class _ArticleDetailPageState extends State<ArticleDetailPage> {
         theme: ThemeData(
           primarySwatch: Colors.pink,
         ),
+        debugShowCheckedModeBanner: false,
         home: Scaffold(
           appBar: AppBar(
             title: const Text('Article'),
@@ -82,6 +82,19 @@ class _ArticleDetailPageState extends State<ArticleDetailPage> {
                   return const CircularProgressIndicator();
                 },
               ),
+            ),
+          ),
+          bottomNavigationBar: BottomAppBar(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
             ),
           ),
         ));

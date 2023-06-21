@@ -1,3 +1,5 @@
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:minipressflutter/models/Articles.dart';
 import 'package:minipressflutter/screens/ArticleDetails.dart';
@@ -13,6 +15,8 @@ class ArticlesPage extends StatefulWidget {
 
 class _ArticlesPageState extends State<ArticlesPage> {
   late Future<List<Articles>> futureArticles;
+  late List<Articles> articlesList;
+  bool isReversed = false;
 
   final TextEditingController _searchController = TextEditingController();
 
@@ -20,7 +24,22 @@ class _ArticlesPageState extends State<ArticlesPage> {
   void initState() {
     super.initState();
     futureArticles = fetchArticles();
-    //futureArticlesByOrderDate_Crea = fetchArticlesByOrderDate_Crea();
+  }
+
+  Future<List<Articles>> fetchArticles() async {
+    List<Articles> articles = await fetchArticlesByOrderDateCreaDesc();
+    if (isReversed) {
+      articles = articles.reversed.toList();
+    }
+    articlesList = articles;
+    return articles;
+  }
+
+  void changeOrder() {
+    setState(() {
+      isReversed = !isReversed;
+      futureArticles = fetchArticles();
+    });
   }
 
   @override
@@ -30,6 +49,7 @@ class _ArticlesPageState extends State<ArticlesPage> {
       theme: ThemeData(
         primarySwatch: Colors.pink,
       ),
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: Container(
@@ -64,6 +84,12 @@ class _ArticlesPageState extends State<ArticlesPage> {
               ),
             ),
           ),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.sort),
+              onPressed: changeOrder,
+            ),
+          ],
         ),
         body: Center(
           child: FutureBuilder<List<Articles>>(

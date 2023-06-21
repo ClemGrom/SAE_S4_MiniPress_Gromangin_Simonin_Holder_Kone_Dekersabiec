@@ -27,6 +27,7 @@ class _ArticlesByAuteurPageState extends State<ArticlesByAuteurPage> {
       theme: ThemeData(
         primarySwatch: Colors.pink,
       ),
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Articles par auteur'),
@@ -72,6 +73,19 @@ class _ArticlesByAuteurPageState extends State<ArticlesByAuteurPage> {
 
               return const CircularProgressIndicator();
             },
+          ),
+        ),
+        bottomNavigationBar: BottomAppBar(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
           ),
         ),
       ),
