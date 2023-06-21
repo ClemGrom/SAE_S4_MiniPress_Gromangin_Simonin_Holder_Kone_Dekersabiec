@@ -99,13 +99,13 @@ class CreateUserAction extends Action
 }
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $args['username'] = $_POST["username"];
+        $args['username'] = $_POST["Cusername"];
         if ($_POST["Cpassword"] == $_POST["CCpassword"]) {
-            $args['password'] = $_POST["password"];
+            $args['password'] = $_POST["Cpassword"];
         } else {
             throw new InvalidArgumentException('Les mots de passe ne correspondent pas');
         }
-        $args['email'] = $_POST["email"];
+        $args['email'] = $_POST["Cemail"];
 
 
         try {
