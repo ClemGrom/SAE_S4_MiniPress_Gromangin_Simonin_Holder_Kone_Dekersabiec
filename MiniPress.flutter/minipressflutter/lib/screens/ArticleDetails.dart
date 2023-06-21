@@ -68,9 +68,6 @@ class _ArticleDetailPageState extends State<ArticleDetailPage> {
                         ),
                       ),
                     ),
-                    // Markdown(
-                    //   data: snapshot.data!.contenu,
-                    // ),
                   ],
                 );
               } else if (snapshot.hasError) {
