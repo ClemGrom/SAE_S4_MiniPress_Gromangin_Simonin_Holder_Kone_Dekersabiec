@@ -27,7 +27,7 @@ class _ArticlesPageState extends State<ArticlesPage> {
   }
 
   Future<List<Articles>> fetchArticles() async {
-    List<Articles> articles = await fetchArticlesByOrderDateCreaAsc();
+    List<Articles> articles = await fetchArticlesByOrderDateCreaDesc();
     if (isReversed) {
       articles = articles.reversed.toList();
     }
