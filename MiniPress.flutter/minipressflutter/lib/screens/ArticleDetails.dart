@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minipressflutter/models/Articles.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 class ArticleDetailPage extends StatefulWidget {
   final Articles article;
@@ -11,6 +12,8 @@ class ArticleDetailPage extends StatefulWidget {
 
 class _ArticleDetailPageState extends State<ArticleDetailPage> {
   late Future<Articles> futureArticle;
+
+  String data = "<h1>Test</h1> <p>TestP</p>";
 
   @override
   void initState() {
@@ -64,15 +67,14 @@ class _ArticleDetailPageState extends State<ArticleDetailPage> {
                         Padding(
                           padding: EdgeInsets.all(10.0),
                           child: Text(
-                            snapshot.data!.resume +
-                                "\n" +
-                                snapshot.data!.contenu,
+                            snapshot.data!.resume,
                             style: const TextStyle(
                               fontSize: 20.0,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
+                        Html(data: snapshot.data!.contenu)
                       ],
                     );
                   } else if (snapshot.hasError) {

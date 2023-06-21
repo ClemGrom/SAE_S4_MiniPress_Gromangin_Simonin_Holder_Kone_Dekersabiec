@@ -2,6 +2,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:markdown/markdown.dart';
+import 'package:html/parser.dart' show parse;
+import 'package:html/dom.dart' as dom;
 
 class Articles {
   final String id;
@@ -115,6 +117,8 @@ Future<Articles> fetchArticleByID(String id) async {
     }
 
     data['contenu'] = markdownToHtml(data['contenu']);
+    // data['contenu'] = parse(data['contenu']);
+    // dom.Document document = parsparse(htmlData);
 
     return Articles.fromJson(data);
   } else {
