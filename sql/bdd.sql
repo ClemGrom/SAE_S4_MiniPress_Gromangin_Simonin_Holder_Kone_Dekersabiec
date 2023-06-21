@@ -87,12 +87,21 @@ INSERT INTO `categorie` (`id`, `titre`, `description`) VALUES
 
 CREATE TABLE `image` (
   `id` int NOT NULL,
-  `categ_id` int DEFAULT NULL,
-  `author_id` int DEFAULT NULL
+  `url` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
+--
+-- Structure de la table `image2article`
+--
+
+CREATE TABLE `image2article` (
+  `article_id` int NOT NULL,
+  `image_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
 --
 -- Structure de la table `user_status`
 --
@@ -161,9 +170,15 @@ ALTER TABLE `categorie`
 -- Index pour la table `image`
 --
 ALTER TABLE `image`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `categ_id` (`categ_id`),
-  ADD KEY `author_id` (`author_id`);
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `image2article`
+--
+ALTER TABLE `image2article`
+  ADD KEY `article_id` (`article_id`),
+  ADD KEY `image_id` (`image_id`);
+
 
 --
 -- Index pour la table `user_status`
@@ -218,12 +233,11 @@ ALTER TABLE `article`
   ADD CONSTRAINT `article_ibfk_2` FOREIGN KEY (`author_id`) REFERENCES `utilisateur` (`id`);
 
 --
--- Contraintes pour la table `image`
+-- Contraintes pour la table `image2article`
 --
-ALTER TABLE `image`
-  ADD CONSTRAINT `image_ibfk_1` FOREIGN KEY (`categ_id`) REFERENCES `categorie` (`id`),
-  ADD CONSTRAINT `image_ibfk_2` FOREIGN KEY (`author_id`) REFERENCES `utilisateur` (`id`);
-
+ALTER TABLE `image2article`
+    ADD CONSTRAINT `image2article_ibfk_1` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`),
+    ADD CONSTRAINT `image2article_ibfk_2` FOREIGN KEY (`image_id`) REFERENCES `image` (`id`);
 --
 -- Contraintes pour la table `utilisateur`
 --
