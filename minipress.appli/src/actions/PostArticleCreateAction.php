@@ -8,11 +8,11 @@ use Psr\Http\Message\ServerRequestInterface;
 use Slim\Views\Twig;
 use Twig\Error\Error;
 
-class ArticleCreateHandler extends Action
+class PostArticleCreateAction extends Action
 {
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        if (isset($request->getParsedBody()['titre']) && $request->getParsedBody()['resume']) {
+        if (isset($request->getParsedBody()['titre']) && isset($request->getParsedBody()['resume'])) {
 
             $titre = $request->getParsedBody()['titre'];
             $resume = $request->getParsedBody()['resume'];

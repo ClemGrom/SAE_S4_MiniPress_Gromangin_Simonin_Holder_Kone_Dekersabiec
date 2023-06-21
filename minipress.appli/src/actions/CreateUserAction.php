@@ -59,6 +59,9 @@ class CreateUserAction extends Action
         }
     }
 
+    /**
+     * @throws \Exception
+     */
     public function CreateUser(ServerRequestInterface $request, ResponseInterface $response, array &$args): ResponseInterface
     {
 
@@ -66,7 +69,7 @@ class CreateUserAction extends Action
             throw new InvalidArgumentException('Le mot de passe doit contenir au moins 10 caractères');
         }
 
-        if (checkPasswordStrength($args['password']) == false) {
+        if (!$this->checkPasswordStrength($args['password'])) {
             throw new InvalidArgumentException('Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial');
         }
 
@@ -74,10 +77,10 @@ class CreateUserAction extends Action
             throw new InvalidArgumentException("L'username doit contenir au moins 3 caractères.");
         }
 
-        if (checkUsernameDB($args['username']) == false) {
+        if (!$this->checkUsernameDB($args['username'])) {
             throw new InvalidArgumentException("L'username est déjà utilisé.");
         }
-        if (checkEmailDB($args['email']) == false) {
+        if (!$this->checkEmailDB($args['email'])) {
             throw new InvalidArgumentException("L'email est déjà utilisé.");
         }
 
@@ -86,9 +89,35 @@ class CreateUserAction extends Action
         $hash=password_hash($args['password'], PASSWORD_DEFAULT, $options=[]);
 
         $user = new Utilisateur();
+        $user->username = $args['username'];
+        $user->email = $args['email'];
+        $user->password = $hash;
+        $user->activation_token = $args['activation_token'];
 
 
-
+        return $user;
     }
 
+
 }
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $args['username'] = $_POST["Cusername"];
+        if ($_POST["Cpassword"] == $_POST["CCpassword"]) {
+            $args['password'] = $_POST["Cpassword"];
+        } else {
+            throw new InvalidArgumentException('Les mots de passe ne correspondent pas');
+        }
+        $args['email'] = $_POST["Cemail"];
+
+        try {
+            $result = CreateUser($args);
+        } catch (InvalidArgumentException $e) {
+            $error = $e->getMessage();
+        } catch (Exception $e) {
+            $error = "Une erreur est survenue";
+        }
+
+        $user = CreateUser($args);
+        AuthorService::saveUser($user);
+    }

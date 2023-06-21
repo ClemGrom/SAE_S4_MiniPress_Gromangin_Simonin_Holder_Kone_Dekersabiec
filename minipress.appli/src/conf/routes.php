@@ -2,10 +2,18 @@
 
 namespace minipress\app\conf;
 
-use minipress\app\actions\ArticleCreateAction;
-use minipress\app\actions\ArticleCreateHandler;
+use minipress\app\actions\GetArticleCreateAction;
+use minipress\app\actions\GetCategorieCreateAction;
+use minipress\app\actions\PostArticleCreateAction;
+use minipress\app\actions\PostCategorieCreateAction;
 
 return function ($app) {
-    $app->get('/article/create', ArticleCreateAction::class)->setName('article_create');
-    $app->post('/article/create', ArticleCreateHandler::class)->setName('article_create_handler');
+
+    //Création d'article
+    $app->get('/article/create', GetArticleCreateAction::class)->setName('article_create');
+    $app->post('/article/create', PostArticleCreateAction::class);
+
+    //Création de catégorie
+    $app->get('/categorie/create', GetCategorieCreateAction::class)->setName('categorie_create');
+    $app->post('/categorie/create', PostCategorieCreateAction::class);
 };
