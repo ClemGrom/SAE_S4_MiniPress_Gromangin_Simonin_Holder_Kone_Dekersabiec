@@ -1,0 +1,15 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+
+    <h1>Nouvelle Catégorie</h1>
+    <form method="post">
+        <label for="titre">Titre</label>
+        <input type="text" name="titre" id="titre"/>
+        <br>
+        <label for="desc">Description</label>
+        <input type="text" name="desc" id="desc"/>
+        <br>
+        <input type="submit" value="Créer">
+    </form>
+{% endblock %}

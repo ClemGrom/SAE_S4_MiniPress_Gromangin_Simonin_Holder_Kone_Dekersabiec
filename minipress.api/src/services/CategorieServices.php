@@ -8,13 +8,11 @@ class CategorieServices
 {
     public function getCategories()
     {
-        $categories = Categorie::all();
-        return $categories->toArray();
+        return Categorie::all()->toArray();
     }
 
-    public function getCategorie($id)
+    public function getCategorieID($id)
     {
-        $categorie = Categorie::find($id);
-        return $categorie->toArray();
+        return Categorie::find($id);
     }
 }

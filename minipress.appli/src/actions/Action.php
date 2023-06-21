@@ -8,6 +8,6 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 abstract class Action
 {
 
-    public abstract function __invoke(Request $request, Response $response, $args):Response;
-    
+    public abstract function __invoke(Request $request, Response $response, array $args): Response;
+
 }

@@ -2,20 +2,18 @@
 
 namespace minipress\app\services;
 
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use miniPress\app\models\Article;
-use miniPress\app\models\Categorie;
+use minipress\app\models\Article;
 
 class ArticleService
 {
-    public static function createArticle(array $data) : Article
+    public static function createArticle(array $data): void
     {
         $article = new Article();
         $article->titre = $data['titre'];
         $article->resume = $data['resume'];
         $article->contenu = $data['contenu'];
-        $article->date =  date('Y-m-d H:i:s');   
+        $article->date_crea = date('Y-m-d H:i:s');
+        $article->categ_id = $data['categorie'];
         $article->save();
-        return $article;
     }
 }

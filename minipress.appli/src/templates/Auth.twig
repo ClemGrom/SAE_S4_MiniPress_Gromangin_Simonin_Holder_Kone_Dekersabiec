@@ -1,0 +1,19 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+
+    <section id="account">
+        <div id="connexion">
+            <h2>Connexion</h2>
+            <form id="connect" method="post" action="Connect">
+                <label for="username">Nom d'utilisateur</label>
+                <input type="text" name="username" id="username" placeholder="..." required>
+                <label for="password">Mot de passe</label>
+                <input type="password" name="password" id="password" placeholder="Mot de passe" required>
+                <button id="submitConnect">Connexion</button>
+            </form>
+        </div>
+
+    </section>
+
+{% endblock %}

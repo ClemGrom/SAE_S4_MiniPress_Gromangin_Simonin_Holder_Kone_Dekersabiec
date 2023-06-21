@@ -1,23 +1,20 @@
-import {api_links} from "./api.js";
-
-function loadArticle(id) {
-    const url = api_links + "/articles/" + id;
+/*
+ * Fonction load qui charge des informations depuis notre API
+ * @param url l'url de l'API
+ * @return les données
+ */
+function load(url) {
+    // On retourne une promesse avec les données
     return fetch(url)
+        // On convertit les données en JSON
         .then(response => response.json())
+        // On retourne les données
         .then(data => {
-            return data;
+            return data
         })
-        .catch(error => console.log(error));
+        // On affiche l'erreur dans la console en cas d'erreur
+        .catch(error => console.log(error))
 }
 
-function loadAllArticles() {
-    const url = api_links + "/articles";
-    return fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            return data;
-        })
-        .catch(error => console.log(error));
-}
-
-export { loadArticle, loadAllArticles };
+// Export
+export {load}
