@@ -27,7 +27,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('MiniPress'),
+          title: const Text('Categorie'),
         ),
         body: Center(
           child: FutureBuilder<List<Categories>>(
@@ -38,28 +38,21 @@ class _CategoriesPageState extends State<CategoriesPage> {
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
                     final category = snapshot.data![index];
-                    return ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                CategoryDetailsPage(category: category),
-                          ),
-                        );
+                    return Card(
+                        child: ListTile(
+                      title: Text(category.titre),
+                      onTap: () {
+                        setState(() {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  CategoryDetailsPage(category: category),
+                            ),
+                          );
+                        });
                       },
-                      child: Text(
-                        'Catégorie : ' +
-                            category.titre +
-                            '\n' +
-                            category.description,
-                        style: const TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    );
+                    ));
                   },
                 );
               } else if (snapshot.hasError) {

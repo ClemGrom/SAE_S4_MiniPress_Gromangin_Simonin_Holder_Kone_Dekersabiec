@@ -62,8 +62,7 @@ class _ArticlesPageState extends State<ArticlesPage> {
           ),
         )),
         body: Center(
-            child: Scaffold(
-          body: FutureBuilder<List<Articles>>(
+          child: FutureBuilder<List<Articles>>(
             future: futureArticles,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
@@ -72,29 +71,29 @@ class _ArticlesPageState extends State<ArticlesPage> {
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
                     final article = snapshot.data![index];
-                    return ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                ArticleDetailPage(article: article),
-                          ),
-                        );
-                      },
-                      child: Text(
-                        article.titre +
-                            '\n' +
-                            article.date_crea +
-                            "  -  " +
-                            article.author,
+                    return Card(
+                        child: ListTile(
+                      title: Text(article.titre),
+                      subtitle: Text(
+                        article.date_crea + "  -  " + article.author,
                         style: const TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.pink,
                         ),
                       ),
-                    );
+                      onTap: () {
+                        setState(() {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  ArticleDetailPage(article: article),
+                            ),
+                          );
+                        });
+                      },
+                    ));
                   },
                 ));
               } else if (snapshot.hasError) {
@@ -104,7 +103,7 @@ class _ArticlesPageState extends State<ArticlesPage> {
               return const CircularProgressIndicator();
             },
           ),
-        )),
+        ),
       ),
     );
   }

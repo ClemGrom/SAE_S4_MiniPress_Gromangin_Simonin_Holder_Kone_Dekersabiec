@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minipressflutter/screens/ArticlesPage.dart';
 import 'package:minipressflutter/screens/CategoriesPage.dart';
-import 'package:minipressflutter/screens/HomePage.dart';
 
 class MiniPress extends StatefulWidget {
   const MiniPress({super.key});
@@ -13,7 +12,6 @@ class MiniPress extends StatefulWidget {
 class _MiniPressState extends State<MiniPress> {
   int _currentIndex = 0;
   final List<Widget> _tabs = [
-    HomePage(),
     CategoriesPage(),
     ArticlesPage(),
   ];
@@ -36,10 +34,6 @@ class _MiniPressState extends State<MiniPress> {
               });
             },
             items: [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Home',
-              ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.category),
                 label: 'Categories',
