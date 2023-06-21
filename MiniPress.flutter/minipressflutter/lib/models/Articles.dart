@@ -1,6 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:markdown/markdown.dart';
 
 class Articles {
   final String id;
@@ -112,6 +113,8 @@ Future<Articles> fetchArticleByID(String id) async {
       final Map<String, dynamic> dataAutor = jsonDecode(auteurInfo.body);
       data['auteur'] = dataAutor['auteur'];
     }
+
+    data['contenu'] = markdownToHtml(data['contenu']);
 
     return Articles.fromJson(data);
   } else {
