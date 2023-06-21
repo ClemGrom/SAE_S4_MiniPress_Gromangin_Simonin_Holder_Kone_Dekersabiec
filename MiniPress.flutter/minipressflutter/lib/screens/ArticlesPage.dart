@@ -49,6 +49,7 @@ class _ArticlesPageState extends State<ArticlesPage> {
       theme: ThemeData(
         primarySwatch: Colors.pink,
       ),
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: Container(

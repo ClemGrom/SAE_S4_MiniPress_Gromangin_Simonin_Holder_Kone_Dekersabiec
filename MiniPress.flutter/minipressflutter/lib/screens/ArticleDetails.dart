@@ -26,6 +26,7 @@ class _ArticleDetailPageState extends State<ArticleDetailPage> {
         theme: ThemeData(
           primarySwatch: Colors.pink,
         ),
+        debugShowCheckedModeBanner: false,
         home: Scaffold(
           appBar: AppBar(
             title: const Text('Article'),

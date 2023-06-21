@@ -23,6 +23,7 @@ class _ArticleAffichagePageState extends State<ArticleAffichagePage> {
       theme: ThemeData(
         primarySwatch: Colors.pink,
       ),
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: Container(

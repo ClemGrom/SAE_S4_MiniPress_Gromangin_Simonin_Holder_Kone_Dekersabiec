@@ -25,6 +25,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
       theme: ThemeData(
         primarySwatch: Colors.pink,
       ),
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Categorie'),
