@@ -7,10 +7,10 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Views\Twig;
 
 
-class AccueilAction extends Action
+class HomeAction extends Action
 {
     public function __invoke(Request $request, Response $response, $args): Response
     {
-        return Twig::fromRequest($request)->render($response, 'home.twig');
+        return Twig::fromRequest($request)->render($response, 'Home.twig');
     }
 }
