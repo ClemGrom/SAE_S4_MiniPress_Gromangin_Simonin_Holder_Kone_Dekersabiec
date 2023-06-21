@@ -40,7 +40,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                     final category = snapshot.data![index];
                     return Card(
                         child: ListTile(
-                      title: Text(category.titre),
+                      title: Text(category.titre, textAlign: TextAlign.center),
                       onTap: () {
                         setState(() {
                           Navigator.push(
