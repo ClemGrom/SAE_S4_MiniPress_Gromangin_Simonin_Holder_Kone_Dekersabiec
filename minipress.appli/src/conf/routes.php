@@ -3,6 +3,7 @@
 namespace minipress\app\conf;
 
 use minipress\app\actions\HomeAction;
+use minipress\app\actions\GetAllArticlesAction;
 use minipress\app\actions\GetArticleCreateAction;
 use minipress\app\actions\GetCategorieCreateAction;
 use minipress\app\actions\PostArticleCreateAction;
@@ -13,6 +14,8 @@ return function ($app) {
     //page d'acceuil
     $app->get('[/]', HomeAction::class)->setName('home_page');
 
+    //liste des articles
+    $app->get('/articles', GetAllArticlesAction::class)->setName('list_articles');
     
     //Création d'article
     $app->get('/article/create', GetArticleCreateAction::class)->setName('article_create');
