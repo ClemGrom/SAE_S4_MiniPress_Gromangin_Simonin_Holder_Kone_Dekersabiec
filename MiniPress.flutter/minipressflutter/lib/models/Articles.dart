@@ -153,35 +153,41 @@ Future<List<Articles>> fetchArticlesBySearch(String word) async {
   }
 }
 
-// Future<List<Articles>> fetchArticlesByAuthor(String authorID) async {
-//   final response =
-//       await http.get(Uri.parse('http://localhost:20003/api/auteurs/$authorID'));
+Future<List<Articles>> fetchArticlesByAuthor(String authorName) async {
+  final response = await http.get(
+    Uri.parse('http://docketu.iutnc.univ-lorraine.fr:20003/api/articles'),
+  );
 
-//   if (response.statusCode == 200) {
-//     final Map<String, dynamic> data = jsonDecode(response.body);
-//     List<dynamic> res = [];
-//     for (int i = 0; i < data['articles'].length; i++) {
-//       if (data['articles'][i]['auteur'] == null) {
-//         data['articles'][i]['auteur'] = "Inconnu";
-//       } else {
-//         final auteurInfo = await http.get(Uri.parse(
-//             'http://localhost:20003/api/auteurs/' +
-//                 data['articles'][i]['auteur'].toString()));
-//         final Map<String, dynamic> dataAutor = jsonDecode(auteurInfo.body);
-//         data['articles'][i]['auteur'] = dataAutor['auteur'];
-//       }
+  if (response.statusCode == 200) {
+    final Map<String, dynamic> data = jsonDecode(response.body);
+    List<dynamic> res = [];
 
-//       data['articles'][i]['resume'] = "";
-//       data['articles'][i]['contenu'] = "";
-//       data['articles'][i]['categorie'] = 0;
+    for (int i = 0; i < data['articles'].length; i++) {
+      if (data['articles'][i]['auteur'] == null) {
+        data['articles'][i]['auteur'] = "Inconnu";
+      } else {
+        final auteurInfo = await http.get(Uri.parse(
+          'http://docketu.iutnc.univ-lorraine.fr:20003/api/auteurs/' +
+              data['articles'][i]['auteur'].toString(),
+        ));
+        final Map<String, dynamic> dataAutor = jsonDecode(auteurInfo.body);
+        data['articles'][i]['auteur'] = dataAutor['auteur'];
+      }
 
-//       res.add(data['articles'][i]);
-//     }
-//     return res.map((json) => Articles.fromJson(json)).toList();
-//   } else {
-//     throw Exception('Failed to load Articles');
-//   }
-// }
+      data['articles'][i]['resume'] = "";
+      data['articles'][i]['contenu'] = "";
+      data['articles'][i]['categorie'] = 0;
+
+      if (data['articles'][i]['auteur'] == authorName) {
+        res.add(data['articles'][i]);
+      }
+    }
+    return res.map((json) => Articles.fromJson(json)).toList();
+  } else {
+    throw Exception('Failed to load Articles');
+  }
+}
+
 
 // Future<List<Articles>> fetchArticlesByOrderDateCrea() async {
 //   final response = await http
