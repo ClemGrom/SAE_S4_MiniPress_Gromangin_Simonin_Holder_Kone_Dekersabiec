@@ -6,6 +6,11 @@ use minipress\app\models\Article;
 
 class ArticleService
 {
+
+    public function getArticles(){
+        return Article::all()->toArray();
+    }
+
     public static function createArticle(array $data): void
     {
         $article = new Article();
