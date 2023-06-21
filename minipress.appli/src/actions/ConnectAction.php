@@ -1,8 +1,7 @@
 <?php
 
-namespace minpress\appli\action;
+namespace minipress\app\actions;
 
-use minipress\app\actions\Action;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Views\Twig;
