@@ -2,52 +2,86 @@
 <html>
 <head>
     <title>MiniPress</title>
-    <style>
-        .grid-container {
-            display: grid;
-            grid-template-areas:
-            'header header header'
-            'nav main main'
-            'footer footer footer';
-            grid-gap: 10px;
-            padding: 10px;
-        }
+            <style>
+            .grid-container {
+                display: grid;
+                grid-template-areas:
+                'header header header'
+                'nav main main'
+                'footer footer footer';
+                grid-gap: 10px;
+                padding: 10px;
+            }
 
-        .header, .footer {
-            grid-area: auto;
-            background-color: #cccccc;
-            padding: 10px;
-            text-align: center;
-        }
+            .header, .footer {
+                grid-area: auto;
+                background-color: #cccccc;
+                padding: 10px;
+                text-align: center;
+            }
 
-        .nav {
-            grid-area: nav;
-            background-color: #dddddd;
-            padding: 10px;
-        }
+            .nav {
+                grid-area: nav;
+                background-color: #dddddd;
+                padding: 10px;    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>MiniPress</title>
+        <style>
+            .grid-container {
+                display: grid;
+                grid-template-areas:
+                'header header header'
+                'nav main main'
+                'footer footer footer';
+                grid-gap: 10px;
+                padding: 10px;
+            }
 
-        .main {
-            grid-area: main;
-            background-color: #eeeeee;
-            padding: 10px;
-        }
-    </style>
+            .header, .footer {
+                grid-area: auto;
+                background-color: #cccccc;
+                padding: 10px;
+                text-align: center;
+            }
+
+            .nav {
+                grid-area: nav;
+                background-color: #dddddd;
+                padding: 10px;
+            }
+
+            .main {
+                grid-area: main;
+                background-color: #eeeeee;
+                padding: 10px;
+            }
+        </style>
 </head>
-<body class="grid-container">
-<header class="header">
-    <!-- En-tête de l'application -->
-</header>
+<body>
+    <header>
+        <!-- Contenu du header -->
+        <h1>MiniPress</h1>
+        <p>Un mini CMS pour créer et stocker des articles en ligne.</p>
+    </header>
 
-<nav class="nav">
-    <!-- Barre de navigation de l'application -->
-</nav>
+    <nav>
+        <!-- Barre de navigation -->
+        <ul>
+            <li><a href="/">Accueil</a></li>
+            <li><a href="/articles">Articles</a></li>
+            <li><a href="/admin">Admin</a></li>
+        </ul>
+    </nav>
 
-<main class="main">
-    {% block body %}{% endblock %}
-</main>
+    <main>
+        <!-- Contenu principal de la page -->
+        {% block content %}{% endblock %}
+    </main>
 
-<footer class="footer">
-    <!-- Pied de page de l'application -->
-</footer>
+    <footer>
+        <!-- Contenu du footer -->
+        <p>&copy; {{ "now"|date("Y") }} MiniPress. Tous droits réservés.</p>
+    </footer>
 </body>
 </html>
