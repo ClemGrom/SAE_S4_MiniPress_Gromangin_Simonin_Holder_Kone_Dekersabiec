@@ -8,14 +8,13 @@
         <input type="text" name="titre" id="titre"/>
         <br>
         <label for="resume">Résumé</label>
-        <textarea name="resume" id="resume"></textarea>
+        <input name="resume" id="resume"/>
         <br>
         <label for="contenu">Contenu</label>
-        <textarea name="contenu" id="contenu"></textarea>
+        <input name="contenu" id="contenu"/>
         <br>
         <label for="categorie">Catégorie associée à l'article</label>
         <select name="categorie" id="categSelect">
-            <option value="">Aucune catégorie sélectionnée</option>
             {% for categorie in categories %}
                 <option value={{ categorie.id }}>{{ categorie.titre }}</option>
             {% endfor %}
