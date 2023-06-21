@@ -34,8 +34,8 @@ class Articles {
 }
 
 Future<List<Articles>> fetchArticles() async {
-  final response =
-      await http.get(Uri.parse('http://localhost:20003/api/articles'));
+  final response = await http.get(
+      Uri.parse('http://docketu.iutnc.univ-lorraine.fr:20003/api/articles'));
 
   if (response.statusCode == 200) {
     final Map<String, dynamic> data = jsonDecode(response.body);
@@ -45,7 +45,7 @@ Future<List<Articles>> fetchArticles() async {
         data['articles'][i]['auteur'] = "Inconnu";
       } else {
         final auteurInfo = await http.get(Uri.parse(
-            'http://localhost:20003/api/auteurs/' +
+            'http://docketu.iutnc.univ-lorraine.fr:20003/api/auteurs/' +
                 data['articles'][i]['auteur'].toString()));
         final Map<String, dynamic> dataAutor = jsonDecode(auteurInfo.body);
         data['articles'][i]['auteur'] = dataAutor['auteur'];
@@ -65,7 +65,9 @@ Future<List<Articles>> fetchArticles() async {
 
 Future<List<Articles>> fetchArticlesByCategories(String categID) async {
   final response = await http.get(Uri.parse(
-      'http://localhost:20003/api/categories/' + categID + '/articles'));
+      'http://docketu.iutnc.univ-lorraine.fr:20003/api/categories/' +
+          categID +
+          '/articles'));
 
   if (response.statusCode == 200) {
     final Map<String, dynamic> data = jsonDecode(response.body);
@@ -76,7 +78,7 @@ Future<List<Articles>> fetchArticlesByCategories(String categID) async {
         data['articles'][i]['auteur'] = "Inconnu";
       } else {
         final auteurInfo = await http.get(Uri.parse(
-            'http://localhost:20003/api/auteurs/' +
+            'http://docketu.iutnc.univ-lorraine.fr:20003/api/auteurs/' +
                 data['articles'][i]['auteur'].toString()));
         final Map<String, dynamic> dataAutor = jsonDecode(auteurInfo.body);
         data['articles'][i]['auteur'] = dataAutor['auteur'];
@@ -96,8 +98,8 @@ Future<List<Articles>> fetchArticlesByCategories(String categID) async {
 }
 
 Future<Articles> fetchArticleByID(String id) async {
-  final response =
-      await http.get(Uri.parse('http://localhost:20003/api/articles/' + id));
+  final response = await http.get(Uri.parse(
+      'http://docketu.iutnc.univ-lorraine.fr:20003/api/articles/' + id));
 
   if (response.statusCode == 200) {
     final Map<String, dynamic> data = jsonDecode(response.body);
@@ -105,7 +107,8 @@ Future<Articles> fetchArticleByID(String id) async {
       data['auteur'] = "Inconnu";
     } else {
       final auteurInfo = await http.get(Uri.parse(
-          'http://localhost:20003/api/auteurs/' + data['auteur'].toString()));
+          'http://docketu.iutnc.univ-lorraine.fr:20003/api/auteurs/' +
+              data['auteur'].toString()));
       final Map<String, dynamic> dataAutor = jsonDecode(auteurInfo.body);
       data['auteur'] = dataAutor['auteur'];
     }
@@ -117,8 +120,8 @@ Future<Articles> fetchArticleByID(String id) async {
 }
 
 Future<List<Articles>> fetchArticlesBySearch(String word) async {
-  final response =
-      await http.get(Uri.parse('http://localhost:20003/api/articles'));
+  final response = await http.get(
+      Uri.parse('http://docketu.iutnc.univ-lorraine.fr:20003/api/articles'));
 
   if (response.statusCode == 200) {
     final Map<String, dynamic> data = jsonDecode(response.body);
@@ -128,7 +131,7 @@ Future<List<Articles>> fetchArticlesBySearch(String word) async {
         data['articles'][i]['auteur'] = "Inconnu";
       } else {
         final auteurInfo = await http.get(Uri.parse(
-            'http://localhost:20003/api/auteurs/' +
+            'http://docketu.iutnc.univ-lorraine.fr:20003/api/auteurs/' +
                 data['articles'][i]['auteur'].toString()));
         final Map<String, dynamic> dataAutor = jsonDecode(auteurInfo.body);
         data['articles'][i]['auteur'] = dataAutor['auteur'];
