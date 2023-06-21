@@ -59,6 +59,9 @@ class CreateUserAction extends Action
         }
     }
 
+    /**
+     * @throws \Exception
+     */
     public function CreateUser(ServerRequestInterface $request, ResponseInterface $response, array &$args): ResponseInterface
     {
 
@@ -66,7 +69,7 @@ class CreateUserAction extends Action
             throw new InvalidArgumentException('Le mot de passe doit contenir au moins 10 caractères');
         }
 
-        if (checkPasswordStrength($args['password']) == false) {
+        if (!$this->checkPasswordStrength($args['password'])) {
             throw new InvalidArgumentException('Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial');
         }
 
@@ -74,10 +77,10 @@ class CreateUserAction extends Action
             throw new InvalidArgumentException("L'username doit contenir au moins 3 caractères.");
         }
 
-        if (checkUsernameDB($args['username']) == false) {
+        if (!$this->checkUsernameDB($args['username'])) {
             throw new InvalidArgumentException("L'username est déjà utilisé.");
         }
-        if (checkEmailDB($args['email']) == false) {
+        if (!$this->checkEmailDB($args['email'])) {
             throw new InvalidArgumentException("L'email est déjà utilisé.");
         }
 
@@ -106,7 +109,6 @@ class CreateUserAction extends Action
             throw new InvalidArgumentException('Les mots de passe ne correspondent pas');
         }
         $args['email'] = $_POST["Cemail"];
-
 
         try {
             $result = CreateUser($args);
