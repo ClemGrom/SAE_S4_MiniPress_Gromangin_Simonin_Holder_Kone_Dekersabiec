@@ -14,4 +14,9 @@ class AuthorService
             return false;
         }
     }
+
+    public function saveUser(Utilisateur $user)
+    {
+        $user->save();
+    }
 }

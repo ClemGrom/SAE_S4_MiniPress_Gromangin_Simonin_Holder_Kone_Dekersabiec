@@ -86,9 +86,36 @@ class CreateUserAction extends Action
         $hash=password_hash($args['password'], PASSWORD_DEFAULT, $options=[]);
 
         $user = new Utilisateur();
+        $user->username = $args['username'];
+        $user->email = $args['email'];
+        $user->password = $hash;
+        $user->activation_token = $args['activation_token'];
 
 
-
+        return $user;
     }
 
+
 }
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $args['username'] = $_POST["username"];
+        if ($_POST["Cpassword"] == $_POST["CCpassword"]) {
+            $args['password'] = $_POST["password"];
+        } else {
+            throw new InvalidArgumentException('Les mots de passe ne correspondent pas');
+        }
+        $args['email'] = $_POST["email"];
+
+
+        try {
+            $result = CreateUser($args);
+        } catch (InvalidArgumentException $e) {
+            $error = $e->getMessage();
+        } catch (Exception $e) {
+            $error = "Une erreur est survenue";
+        }
+
+        $user = CreateUser($args);
+        AuthorService::saveUser($user);
+    }
