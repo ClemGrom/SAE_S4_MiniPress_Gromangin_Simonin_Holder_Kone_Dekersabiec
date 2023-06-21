@@ -84,6 +84,19 @@ class _ArticleDetailPageState extends State<ArticleDetailPage> {
               ),
             ),
           ),
+          bottomNavigationBar: BottomAppBar(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
+          ),
         ));
   }
 }

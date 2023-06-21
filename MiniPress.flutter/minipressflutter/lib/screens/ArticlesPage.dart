@@ -27,45 +27,12 @@ class _ArticlesPageState extends State<ArticlesPage> {
   }
 
   Future<List<Articles>> fetchArticles() async {
-    List<Articles> articles = await fetchArticlesByOrderDate_Crea();
+    List<Articles> articles = await fetchArticlesByOrderDateCreaAsc();
     if (isReversed) {
       articles = articles.reversed.toList();
     }
     articlesList = articles;
     return articles;
-  }
-
-  Future<List<Articles>> fetchArticlesByOrderDate_Crea() async {
-    final response = await http.get(
-      Uri.parse('http://docketu.iutnc.univ-lorraine.fr:20003/api/articles'),
-    );
-
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> data = jsonDecode(response.body);
-      List<dynamic> res = [];
-
-      for (int i = 0; i < data['articles'].length; i++) {
-        if (data['articles'][i]['auteur'] == null) {
-          data['articles'][i]['auteur'] = "Inconnu";
-        } else {
-          final auteurInfo = await http.get(Uri.parse(
-            'http://docketu.iutnc.univ-lorraine.fr:20003/api/auteurs/' +
-                data['articles'][i]['auteur'].toString(),
-          ));
-          final Map<String, dynamic> dataAutor = jsonDecode(auteurInfo.body);
-          data['articles'][i]['auteur'] = dataAutor['auteur'];
-        }
-
-        data['articles'][i]['resume'] = "";
-        data['articles'][i]['contenu'] = "";
-        data['articles'][i]['categorie'] = 0;
-
-        res.add(data['articles'][i]);
-      }
-      return res.map((json) => Articles.fromJson(json)).toList();
-    } else {
-      throw Exception('Failed to load Articles');
-    }
   }
 
   void changeOrder() {
