@@ -101,7 +101,7 @@ class CreateUserAction extends Action
 
 }
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_POST["REQUEST_METHOD"] == "POST" && isset($_POST['createaccount'])) {
         $args['username'] = $_POST["Cusername"];
         if ($_POST["Cpassword"] == $_POST["CCpassword"]) {
             $args['password'] = $_POST["Cpassword"];
@@ -114,8 +114,6 @@ class CreateUserAction extends Action
             $result = CreateUser($args);
         } catch (InvalidArgumentException $e) {
             $error = $e->getMessage();
-        } catch (Exception $e) {
-            $error = "Une erreur est survenue";
         }
 
         $user = CreateUser($args);
