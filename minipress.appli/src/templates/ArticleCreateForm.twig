@@ -24,6 +24,14 @@
                 {% endfor %}
             </select>
         </div>
+        <label for="images">Image associée à l'article</label>
+        <select name="image" id="imgSelect">
+            <option value="">Aucune image</option>
+            {% for image in images %}
+                <option value={{ image.id }}>{{ image.url }}</option>
+            {% endfor %}
+            <br>
+        </select>
         <button type="submit" class="btn btn-primary">Créer</button>
     </form>
 
