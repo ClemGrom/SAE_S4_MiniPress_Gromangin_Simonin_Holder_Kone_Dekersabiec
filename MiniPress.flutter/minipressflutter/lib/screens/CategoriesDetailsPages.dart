@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:minipressflutter/models/Articles.dart';
 import 'package:minipressflutter/models/categories.dart';
 import 'package:minipressflutter/screens/ArticleAffichage.dart';
-import 'package:minipressflutter/screens/ArticleDetails.dart';
 
 class CategoryDetailsPage extends StatefulWidget {
   final Categories category;
