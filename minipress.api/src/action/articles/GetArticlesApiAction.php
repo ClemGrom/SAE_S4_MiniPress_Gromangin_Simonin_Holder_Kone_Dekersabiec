@@ -6,6 +6,11 @@ use minipress\api\services\ArticleServices;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
+/*
+ * Classe GetArticlesApiAction
+ * Affiche les informations de tous les articles
+ */
+
 class GetArticlesApiAction
 {
     public function __invoke(ServerRequestInterface $rq, ResponseInterface $rs, array $args): ResponseInterface

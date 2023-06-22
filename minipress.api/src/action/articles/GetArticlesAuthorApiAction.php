@@ -6,6 +6,11 @@ use minipress\api\services\AuthorServices;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
+/*
+ * Classe GetArticlesAuthorApiAction
+ * Affiche les informations de tous les articles d'un auteur
+ */
+
 class GetArticlesAuthorApiAction
 {
     public function __invoke(ServerRequestInterface $rq, ResponseInterface $rs, array $args): ResponseInterface

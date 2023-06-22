@@ -6,6 +6,11 @@ use minipress\api\services\CategorieServices;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
+/*
+ * Classe GetArticlesCategoryApiAction
+ * Affiche les informations de tous les articles d'une catégorie
+ */
+
 class GetArticlesCategoryApiAction
 {
     public function __invoke(ServerRequestInterface $rq, ResponseInterface $rs, array $args): ResponseInterface
