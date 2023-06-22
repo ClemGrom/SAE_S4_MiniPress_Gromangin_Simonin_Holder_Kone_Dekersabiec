@@ -6,7 +6,21 @@ use minipress\app\models\Article;
 
 class ArticleService
 {
-    public static function createArticle(array $data): Article
+
+    public function getArticles(){
+        return Article::all()->toArray();
+    }
+
+    public function getArticlesByCategory($categoryId)
+    {
+        if ($categoryId) {
+            return Article::where('categ_id', $categoryId)->get()->toArray();
+        } else {
+            return Article::all()->toArray();
+        }
+    }
+    
+    public static function createArticle(array $data): void
     {
         $article = new Article();
         $article->titre = $data['titre'];

@@ -1,6 +1,6 @@
 <?php
 
-namespace minpress\appli\action;
+namespace minipress\app\actions;
 
 use minipress\appli\services\AuthorServices;
 use Psr\Http\Message\ResponseInterface;
@@ -25,8 +25,6 @@ class CreateUserAction extends Action
             ]);
         }
     }
-
-
 
     public function checkPasswordStrength(string $pass): bool {
 
@@ -93,6 +91,7 @@ class CreateUserAction extends Action
         $user->email = $args['email'];
         $user->password = $hash;
         $user->activation_token = $args['activation_token'];
+        $user->user_status = 2;
 
 
         return $user;

@@ -1,0 +1,21 @@
+{% extends 'Layout.twig' %}
+
+{% block content %}
+    <h2>Liste des catégories</h2>
+
+
+    {% if categories is not empty %}
+        <ul class="article-list">
+            {% for categorie in categories %}
+                <li class="article-item">
+                    <a href="#" class="article-button">
+                        {{ categorie.titre }} 
+                    </a>
+                    <p>{{ categorie.content }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucune catégorie trouvé.</p>
+    {% endif %}
+{% endblock %}
