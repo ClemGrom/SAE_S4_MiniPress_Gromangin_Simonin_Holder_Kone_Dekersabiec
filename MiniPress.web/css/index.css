@@ -42,7 +42,7 @@ a {
 }
 
 .anArticle {
-    margin: 5%;
+    margin: 3% 5% 1% 5%;
     text-align: justify;
 }
 
@@ -104,4 +104,10 @@ div > a{
 .categ {
     margin: 30px;
     text-align: center;
+}
+
+.imgArticle{
+    width: 90%;
+    border-radius: 30px;
+    margin: 0% 0% 1% 5%;
 }

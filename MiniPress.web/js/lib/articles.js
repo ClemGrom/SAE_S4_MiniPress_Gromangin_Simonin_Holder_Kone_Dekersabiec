@@ -29,6 +29,15 @@ function getArticleById(id) {
 }
 
 /*
+ * Fonction qui récupère l'image d'un article par son id
+ * @param id l'id de l'article
+ * @return l'image
+*/
+function getImageOfArticle(id) {
+    return load(api_link+ "/articles/" + id + "/images")
+}
+
+/*
  * Fonction qui récupère tous les articles qui contiennent un mot dans leur titre ou leur résumé
  * @param mot le mot à chercher
  * @return les articles
@@ -65,4 +74,4 @@ async function getArticlesSort(sort) {
 }
 
 // Exportation des fonctions
-export {getArticles, getArticlesById, getArticleById, getArticlesByMot, getArticlesSort}
+export {getArticles, getArticlesById, getArticleById, getArticlesByMot, getArticlesSort, getImageOfArticle}
