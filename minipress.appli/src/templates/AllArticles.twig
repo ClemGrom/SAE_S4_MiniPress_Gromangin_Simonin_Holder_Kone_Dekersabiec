@@ -15,12 +15,14 @@
     </form>
 
     {% if articles is not empty %}
+    <a href="/article/create" class="article-item">créer un article</a>
         <ul class="article-list">
             {% for article in articles %}
                 <li class="article-item">
                     <a href="#" class="article-button">
                         {{ article.titre }} - {{ article.date_crea|date('d/m/Y') }}
                     </a>
+                    <p>{{ article.content|raw }}</p>
                 </li>
             {% endfor %}
         </ul>
