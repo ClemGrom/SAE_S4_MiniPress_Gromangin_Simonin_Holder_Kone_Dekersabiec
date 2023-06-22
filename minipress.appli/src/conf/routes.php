@@ -3,6 +3,7 @@
 namespace minipress\app\conf;
 
 use minipress\app\actions\HomeAction;
+use minipress\app\actions\CreateUserAction;
 use minipress\app\actions\GetAllArticlesAction;
 use minipress\app\actions\GetArticleCreateAction;
 use minipress\app\actions\GetCategorieCreateAction;
@@ -10,6 +11,9 @@ use minipress\app\actions\PostArticleCreateAction;
 use minipress\app\actions\PostCategorieCreateAction;
 
 return function ($app) {
+
+    //utilisateurs
+    $app->get('/inscription', CreateUserAction::class)->setName('inscription_users');
 
     //page d'acceuil
     $app->get('[/]', HomeAction::class)->setName('home_page');

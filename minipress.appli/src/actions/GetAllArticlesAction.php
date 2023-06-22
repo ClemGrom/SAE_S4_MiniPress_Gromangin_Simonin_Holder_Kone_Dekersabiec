@@ -12,9 +12,12 @@ class GetAllArticlesAction extends Action
 {
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
+        $queryParams = $request->getQueryParams();
+        $categoryId = isset($queryParams['categorie']) ? $queryParams['categorie'] : null;
+
         $articleService = new ArticleService();
-        $articles = $articleService->getArticles();
-        
-        return Twig::fromRequest($request)->render($response, 'AllArticles.twig', ['articles' =>$articles]);
+        $articles = $articleService->getArticlesByCategory($categoryId);
+
+        return Twig::fromRequest($request)->render($response, 'AllArticles.twig', ['articles' => $articles]);
     }
 }

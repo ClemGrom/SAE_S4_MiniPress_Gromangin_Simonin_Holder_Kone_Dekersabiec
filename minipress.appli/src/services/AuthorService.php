@@ -1,6 +1,7 @@
 <?php
 
 namespace minipress\appli\services;
+
 use minipress\app\models\Utilisateur;
 
 class AuthorService

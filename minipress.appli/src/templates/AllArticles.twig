@@ -3,10 +3,25 @@
 {% block content %}
     <h2>Liste des articles</h2>
 
+    <form method="GET" action="/articles">
+        <label for="category">Sélectionner une catégorie :</label>
+        <select id="category" name="category">
+            <option value="">Toutes les catégories</option>
+            {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Filtrer</button>
+    </form>
+
     {% if articles is not empty %}
-        <ul>
+        <ul class="article-list">
             {% for article in articles %}
-                <li>{{ article.titre }} - {{ article.date_crea|date('d/m/Y') }}</li>
+                <li class="article-item">
+                    <a href="#" class="article-button">
+                        {{ article.titre }} - {{ article.date_crea|date('d/m/Y') }}
+                    </a>
+                </li>
             {% endfor %}
         </ul>
     {% else %}
