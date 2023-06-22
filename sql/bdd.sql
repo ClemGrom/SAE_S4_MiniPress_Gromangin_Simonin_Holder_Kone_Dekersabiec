@@ -95,7 +95,10 @@ CREATE TABLE `image` (
 --
 
 INSERT INTO `image` (`id`, `url`) VALUES
-    (1, 'p1100252.jpg');
+(1, 'banniere.png'),
+(2, 'astro.jpg'),
+(3, 'festive.jpg'),
+(4, 'recette.jpg');
 
 --
 -- Structure de la table `image2article`
@@ -108,7 +111,16 @@ CREATE TABLE `image2article` (
 
 
 INSERT INTO `image2article` (`article_id`, `image_id`) VALUES
-(1, 1);
+(1, 2),
+(2, 1),
+(3, 4),
+(4, 1),
+(5, 1),
+(6, 4),
+(7, 1),
+(8, 1),
+(9, 1),
+(10, 1);
 
 -- --------------------------------------------------------
 --
@@ -236,7 +248,7 @@ ALTER TABLE `utilisateur`
 -- Contraintes pour les tables déchargées
 --
 
---
+
 -- Contraintes pour la table `article`
 --
 ALTER TABLE `article`

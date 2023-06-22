@@ -1,5 +1,5 @@
 // Import
-import{getArticles, getArticlesById, getArticlesByMot, getArticlesSort, getArticleById} from "./articles.js";
+import{getArticles, getArticlesById, getArticlesByMot, getArticlesSort, getArticleById, getImageOfArticle} from "./articles.js";
 import {getAuteur} from "./auteur.js";
 import {getArticlesByAuteur} from "./auteur.js";
 
@@ -102,6 +102,12 @@ async function affichage_article(id) {
     let converter = new showdown.Converter();
     art.contenu = converter.makeHtml(art.contenu);
 
+    let imgArticle = await getImageOfArticle(id)
+
+    let img = document.createElement("img");
+    img.src = `../../shared/img/${imgArticle['images'][0].url}`;
+    img.alt = "Image de l'article";
+    img.classList.add("imgArticle");
     // On crée un div avec les informations de l'article
     let article = document.getElementsByClassName("article");
     let div = document.createElement("div");
@@ -109,6 +115,7 @@ async function affichage_article(id) {
     div.innerHTML = `<h1>${art.titre}</h1><br><p><b><U>Auteur :</U></b> ${auteur}</p>
             <p><b><U>Date de publication :</U></b>  ${art.date}</p><br><p><b><U>Resumé :</U></b> ${art.resume}</p><br><p>${art.contenu}</p>`
     article[0].appendChild(div)
+    article[0].appendChild(img)
 }
 
 // Export
