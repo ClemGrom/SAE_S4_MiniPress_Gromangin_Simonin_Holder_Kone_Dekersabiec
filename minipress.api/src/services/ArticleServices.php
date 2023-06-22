@@ -4,8 +4,19 @@ namespace minipress\api\services;
 
 use minipress\api\models\Article;
 
+/*
+ * Class ArticleServices
+ */
+
 class ArticleServices
 {
+
+    /*
+     * Function getArticles
+     * @param $sort
+     * @return array
+     * Retourne tous les articles sous forme de tableau qui peut être trié par date ou par auteur
+     */
     public function getArticles($sort = null): array
     {
         $a = Article::all()->toArray();
@@ -26,6 +37,12 @@ class ArticleServices
         return $a;
     }
 
+    /*
+     * Function getArticleID
+     * @param $id
+     * @return array
+     * Retourne un article en fonction de son id sous forme de tableau
+     */
     public function getArticleID($id)
     {
         return Article::find($id)->toArray();

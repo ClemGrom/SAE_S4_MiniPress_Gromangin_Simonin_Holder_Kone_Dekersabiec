@@ -6,6 +6,11 @@ use minipress\api\services\ImageServices;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
+/*
+ * Classe GetImagesArticlesAction
+ * Affiche les informations de l'image d'un article
+ */
+
 class GetImagesArticlesAction
 {
     public function __invoke(ServerRequestInterface $rq, ResponseInterface $rs, array $args): ResponseInterface
@@ -21,8 +26,6 @@ class GetImagesArticlesAction
                 'url' => $image['url'],
             ];
         }
-        //PATH des images
-        //"../../../shared/img/p1100252.jpg"
 
         $rs->getBody()->write(json_encode($images_api));
         return $rs

@@ -4,9 +4,19 @@ namespace minipress\api\services;
 
 use minipress\api\models\Image;
 
+/*
+ * Classe ImageServices
+ */
+
 class ImageServices
 {
-//récupère les images associées à un article en passant par la table pivot image2article
+
+    /*
+     * Function getImagesArticleId
+     * @param $articleId
+     * @return $images
+     * Retourne les images d'un article en fonction de l'id de l'article
+     */
     public function getImagesArticleId($articleId)
     {
         $images = Image::whereHas('articles', function ($query) use ($articleId) {
