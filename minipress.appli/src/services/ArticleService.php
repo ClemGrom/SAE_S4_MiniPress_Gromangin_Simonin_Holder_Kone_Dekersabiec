@@ -20,7 +20,7 @@ class ArticleService
         }
     }
     
-    public static function createArticle(array $data): void
+    public static function createArticle(array $data): Article
     {
         $article = new Article();
         $article->titre = $data['titre'];
