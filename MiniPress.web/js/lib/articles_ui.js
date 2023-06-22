@@ -105,7 +105,7 @@ async function affichage_article(id) {
     let imgArticle = await getImageOfArticle(id)
 
     let img = document.createElement("img");
-    img.src = `../../shared/img/${imgArticle['images'][0].url}`;
+    img.src = `../shared/${imgArticle['images'][0].url}`;
     img.alt = "Image de l'article";
     img.classList.add("imgArticle");
     // On crée un div avec les informations de l'article
