@@ -53,10 +53,6 @@ class ConnectUserAction extends Action
         return $user;
     }
 
-    public function
-
-
-
 }
 
 if ($_POST["REQUEST_METHOD"] == "POST" && isset($_POST['Connect']))
@@ -68,11 +64,13 @@ if ($_POST["REQUEST_METHOD"] == "POST" && isset($_POST['Connect']))
 
     if (checkUsernameDB($args['username'])) {
         if (checkPasswordValid($args['password'], $args['username'])) {
-            ConnectUser($args);
+            $user = ConnectUser($args);
         } else {
-            throw new InvalidArgumentException('Mot de passe invalide'));
+            throw new InvalidArgumentException('Mot de passe invalide');
         }
     } else {
-        throw new InvalidArgumentException('Nom d\'utilisateur invalide'));
+        throw new InvalidArgumentException('Nom d\'utilisateur invalide');
     }
+
+    $user->save();
 }
