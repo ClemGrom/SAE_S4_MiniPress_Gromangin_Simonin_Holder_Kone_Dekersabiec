@@ -23,6 +23,7 @@ class Articles {
   final String date_crea;
   final int categ_id;
   final String author;
+  final String url;
 
   /*
    * Constructeur de la classe
@@ -35,7 +36,8 @@ class Articles {
       required this.contenu,
       required this.date_crea,
       required this.categ_id,
-      required this.author});
+      required this.author,
+      required this.url});
 
   /*
    * Fonction de conversion d'un json en objet Articles
@@ -51,6 +53,7 @@ class Articles {
       date_crea: json['date'] as String,
       categ_id: json['categorie'] as int,
       author: json['auteur'] as String,
+      url: json['url'] as String,
     );
   }
 }
@@ -93,6 +96,7 @@ Future<List<Articles>> loadArticles(String links) async {
       data['articles'][i]['resume'] = "";
       data['articles'][i]['contenu'] = "";
       data['articles'][i]['categorie'] = 0;
+      data['articles'][i]['url'] = "";
 
       // ajout de l'article a la liste
       res.add(data['articles'][i]);
@@ -203,9 +207,23 @@ Future<Articles> fetchArticleByID(String id) async {
     // passage du contenu de l'article de markdown a html
     data['contenu'] = markdownToHtml(data['contenu']);
 
+    final image =
+        await http.get(Uri.parse(api_links + 'articles/' + id + '/images'));
+    final Map<String, dynamic> dataImage = jsonDecode(image.body);
+    final url = dataImage['images'][0]['url'];
+    data['url'] = 'assets/img/' + url;
+
     return Articles.fromJson(data);
     // si le chargement echoue
   } else {
     throw Exception('Failed to load Article');
   }
 }
+
+// Future<String> imageLink(String id) async {
+//   final image =
+//       await http.get(Uri.parse(api_links + 'articles/' + id + '/images'));
+//   final Map<String, dynamic> dataImage = jsonDecode(image.body);
+//   final url = dataImage['images'][0]['url'];
+//   return 'assets/img/' + url;
+// }

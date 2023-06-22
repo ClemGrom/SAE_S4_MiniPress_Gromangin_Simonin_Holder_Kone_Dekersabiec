@@ -24,12 +24,15 @@ class _ArticleDetailPageState extends State<ArticleDetailPage> {
   // futureArticle : article à afficher
   late Future<Articles> futureArticle;
 
+  // late Future<String> futurImg;
+
   // Méthode qui permet de créer l'état de la classe
   @override
   void initState() {
     super.initState();
     // Récupération de l'article à afficher
     futureArticle = fetchArticleByID(widget.article.id.toString());
+    // futurImg = imageLink(widget.article.id.toString());
   }
 
   // Méthode qui permet de créer l'affichage de la classe
@@ -87,7 +90,8 @@ class _ArticleDetailPageState extends State<ArticleDetailPage> {
                             ),
                           ),
                         ),
-                        Html(data: snapshot.data!.contenu)
+                        Html(data: snapshot.data!.contenu),
+                        Image.asset(snapshot.data!.url)
                       ],
                     );
                   } else if (snapshot.hasError) {
