@@ -12,7 +12,7 @@ class Image extends Model
     public $timestamps = false;
     public $incrementing = true;
     public $keyType = 'string';
-    public $fillable = ['id', 'article_id'];
+    public $fillable = ['id', 'url'];
 
     public function articles(): BelongsToMany
     {

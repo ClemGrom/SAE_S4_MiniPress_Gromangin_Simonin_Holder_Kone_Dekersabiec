@@ -24,6 +24,7 @@ class _ArticlesSearchPageState extends State<ArticlesSearchPage> {
 
   @override
   Widget build(BuildContext context) {
+    print(futureArticles == [null]);
     return ArticleAffichagePage(articles: futureArticles);
   }
 }

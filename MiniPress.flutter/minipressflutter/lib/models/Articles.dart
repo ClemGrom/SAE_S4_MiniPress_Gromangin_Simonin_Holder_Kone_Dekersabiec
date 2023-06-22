@@ -2,6 +2,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:markdown/markdown.dart';
+import 'package:html/parser.dart' show parse;
+import 'package:html/dom.dart' as dom;
 
 class Articles {
   final String id;
@@ -115,6 +117,8 @@ Future<Articles> fetchArticleByID(String id) async {
     }
 
     data['contenu'] = markdownToHtml(data['contenu']);
+    // data['contenu'] = parse(data['contenu']);
+    // dom.Document document = parsparse(htmlData);
 
     return Articles.fromJson(data);
   } else {
@@ -140,11 +144,17 @@ Future<List<Articles>> fetchArticlesBySearch(String word) async {
         data['articles'][i]['auteur'] = dataAutor['auteur'];
       }
 
-      data['articles'][i]['resume'] = "";
-      data['articles'][i]['contenu'] = "";
-      data['articles'][i]['categorie'] = 0;
-
-      // ajouter que si le mot est dans le titre ou le resume
+      final response = await http.get(Uri.parse(
+          'http://docketu.iutnc.univ-lorraine.fr:20003/api/articles/' +
+              data['articles'][i]['id']));
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> dataArt = jsonDecode(response.body);
+        data['articles'][i]['resume'] = dataArt['resume'];
+        data['articles'][i]['contenu'] = dataArt['contenu'];
+        data['articles'][i]['categorie'] = dataArt['categorie'];
+      } else {
+        throw Exception('Failed to load Articles');
+      }
       if (data['articles'][i]['titre'].toString().contains(word) ||
           data['articles'][i]['resume'].toString().contains(word)) {
         res.add(data['articles'][i]);

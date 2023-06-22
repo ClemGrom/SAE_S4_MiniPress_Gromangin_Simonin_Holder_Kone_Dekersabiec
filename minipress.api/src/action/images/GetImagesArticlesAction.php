@@ -17,10 +17,12 @@ class GetImagesArticlesAction
 
         foreach ($images as $image) {
             $images_api['images'][] = [
-                'image_url' => $image['image_url'],
-                'article_id' => $image['article_id'],
+                'id' => $image['id'],
+                'url' => $image['url'],
             ];
         }
+        //PATH des images
+        //"../../../shared/img/p1100252.jpg"
 
         $rs->getBody()->write(json_encode($images_api));
         return $rs

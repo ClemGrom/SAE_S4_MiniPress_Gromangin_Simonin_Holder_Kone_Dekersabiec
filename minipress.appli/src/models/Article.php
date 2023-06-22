@@ -3,6 +3,7 @@
 namespace minipress\app\models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Article extends Model
 {
@@ -18,5 +19,11 @@ class Article extends Model
     public function author()
     {
         return $this->belongsTo(Utilisateur::class, 'author_id');
+    }
+
+    public function images(): BelongsToMany
+    {
+        return $this->belongsToMany(Image::class, 'image2article', 'article_id',
+            'image_id');
     }
 }

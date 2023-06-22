@@ -18,7 +18,9 @@ class PostArticleCreateAction extends Action
             $resume = $request->getParsedBody()['resume'];
 
             $as = new ArticleService();
-            $as->createArticle($request->getParsedBody());
+            $a = $as->createArticle($request->getParsedBody());
+            $as->addImage($a->id, $request->getParsedBody()['image']);
+
 
             return Twig::fromRequest($request)->render($response, 'ArticleCreated.twig',
                 ['titre' => $titre, 'resume' => $resume]);
