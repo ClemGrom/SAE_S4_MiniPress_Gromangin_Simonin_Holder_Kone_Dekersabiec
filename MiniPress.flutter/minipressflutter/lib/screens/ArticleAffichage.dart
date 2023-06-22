@@ -4,20 +4,33 @@ import 'package:minipressflutter/screens/ArticleDetails.dart';
 import 'package:minipressflutter/screens/ArticlesSearchPage.dart';
 import 'package:minipressflutter/screens/ArticlesByAuteurPage.dart';
 
+/* 
+ * Classe qui permet de retourner un affichage pour une liste d'article
+ */
 class ArticleAffichagePage extends StatefulWidget {
+  // Liste d'article à afficher
   final Future<List<Articles>> articles;
+
+  // Constructeur
   const ArticleAffichagePage({Key? key, required this.articles})
       : super(key: key);
 
+  // Méthode qui permet de créer l'état de la classe
   @override
   _ArticleAffichagePageState createState() => _ArticleAffichagePageState();
 }
 
+/*
+ * Classe qui permet de créer l'état de la classe ArticleAffichagePage
+ */
 class _ArticleAffichagePageState extends State<ArticleAffichagePage> {
+  // Contrôleur de la zone de recherche
   final TextEditingController _searchController = TextEditingController();
 
+  // Méthode qui permet de créer l'affichage de la classe
   @override
   Widget build(BuildContext context) {
+    // Retourne un affichage
     return MaterialApp(
       title: 'MiniPress',
       theme: ThemeData(
@@ -25,6 +38,7 @@ class _ArticleAffichagePageState extends State<ArticleAffichagePage> {
       ),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        // Barre de recherche
         appBar: AppBar(
           title: Container(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -59,6 +73,7 @@ class _ArticleAffichagePageState extends State<ArticleAffichagePage> {
             ),
           ),
         ),
+        // Affichage des articles
         body: Center(
           child: FutureBuilder<List<Articles>>(
             future: widget.articles,
@@ -112,11 +127,11 @@ class _ArticleAffichagePageState extends State<ArticleAffichagePage> {
               } else if (snapshot.hasError) {
                 return Text('${snapshot.error}');
               }
-
               return const CircularProgressIndicator();
             },
           ),
         ),
+        // Barre de navigation
         bottomNavigationBar: BottomAppBar(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,

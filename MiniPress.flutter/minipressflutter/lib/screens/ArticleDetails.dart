@@ -2,25 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:minipressflutter/models/Articles.dart';
 import 'package:flutter_html/flutter_html.dart';
 
+/*
+ * Page d'affichage d'un article en détail après avoir cliqué dessus
+ */
 class ArticleDetailPage extends StatefulWidget {
+  // L'article à afficher
   final Articles article;
+
+  // Constructeur
   const ArticleDetailPage({Key? key, required this.article}) : super(key: key);
 
+  // Méthode qui permet de créer l'état de la classe
   @override
   _ArticleDetailPageState createState() => _ArticleDetailPageState();
 }
 
+/*
+ * Classe qui permet de créer l'état de la classe ArticleDetailPage
+ */
 class _ArticleDetailPageState extends State<ArticleDetailPage> {
+  // futureArticle : article à afficher
   late Future<Articles> futureArticle;
 
-  String data = "<h1>Test</h1> <p>TestP</p>";
-
+  // Méthode qui permet de créer l'état de la classe
   @override
   void initState() {
     super.initState();
+    // Récupération de l'article à afficher
     futureArticle = fetchArticleByID(widget.article.id.toString());
   }
 
+  // Méthode qui permet de créer l'affichage de la classe
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -39,6 +51,7 @@ class _ArticleDetailPageState extends State<ArticleDetailPage> {
                 future: futureArticle,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
+                    // Affichage de l'article
                     return Column(
                       children: [
                         Padding(padding: EdgeInsets.all(10.0)),
@@ -86,6 +99,7 @@ class _ArticleDetailPageState extends State<ArticleDetailPage> {
               ),
             ),
           ),
+          // Barre de navigation
           bottomNavigationBar: BottomAppBar(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,

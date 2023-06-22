@@ -1,11 +1,21 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:markdown/markdown.dart';
-import 'package:html/parser.dart' show parse;
-import 'package:html/dom.dart' as dom;
 
+/*
+ * Classe articles 
+ */
 class Articles {
+  /*
+   * Attributs de la classe
+   * id : id de l'article
+   * titre : titre de l'article
+   * resume : resume de l'article
+   * contenu : contenu de l'article
+   * date_crea : date de creation de l'article
+   * categ_id : id de la categorie de l'article
+   * author : auteur de l'article
+   */
   final String id;
   final String titre;
   final String resume;
@@ -14,6 +24,10 @@ class Articles {
   final int categ_id;
   final String author;
 
+  /*
+   * Constructeur de la classe
+   * initialisation des attributs
+   */
   const Articles(
       {required this.id,
       required this.titre,
@@ -23,6 +37,11 @@ class Articles {
       required this.categ_id,
       required this.author});
 
+  /*
+   * Fonction de conversion d'un json en objet Articles
+   * json : json a convertir
+   * return : objet Articles
+   */
   factory Articles.fromJson(Map<String, dynamic> json) {
     return Articles(
       id: json['id'] as String,
@@ -36,227 +55,157 @@ class Articles {
   }
 }
 
+/*
+ * Lien de l'api
+ */
+const String api_links = "http://docketu.iutnc.univ-lorraine.fr:20003/api/";
+
+/*
+ * Fonction de chargement des articles
+ * @param links : lien de l'api
+ * @return : liste d'articles en fonction du lien
+ */
+Future<List<Articles>> loadArticles(String links) async {
+  // chargement des articles en fonction du lien
+  final response = await http.get(Uri.parse(links));
+
+  // si le chargement est reussi
+  if (response.statusCode == 200) {
+    // recuperation des donnees json et conversion en map
+    final Map<String, dynamic> data = jsonDecode(response.body);
+    List<dynamic> res = [];
+    // pour chaque article on recupere les donnees de l'auteur
+    for (int i = 0; i < data['articles'].length; i++) {
+      // si l'auteur est null on le remplace par inconnu
+      if (data['articles'][i]['auteur'] == null) {
+        data['articles'][i]['auteur'] = "Inconnu";
+        // sinon on recupere les donnees de l'auteur
+      } else {
+        // recuperation des donnees json et conversion en map
+        final auteurInfo = await http.get(Uri.parse(
+            api_links + 'auteurs/' + data['articles'][i]['auteur'].toString()));
+        // recuperation des donnees json et conversion en map
+        final Map<String, dynamic> dataAutor = jsonDecode(auteurInfo.body);
+        data['articles'][i]['auteur'] = dataAutor['auteur'];
+      }
+
+      // initialisation des donnees manquantes a vide
+      data['articles'][i]['resume'] = "";
+      data['articles'][i]['contenu'] = "";
+      data['articles'][i]['categorie'] = 0;
+
+      // ajout de l'article a la liste
+      res.add(data['articles'][i]);
+    }
+    // conversion de la liste en liste d'articles
+    return res.map((json) => Articles.fromJson(json)).toList();
+    // si le chargement echoue
+  } else {
+    throw Exception('Failed to load Articles');
+  }
+}
+
+/*
+ * Fonction qui permet de charger tous les articles
+ * @return : liste d'articles
+ */
 Future<List<Articles>> fetchArticles() async {
-  final response = await http.get(Uri.parse(
-      'http://docketu.iutnc.univ-lorraine.fr:20003/api/articles?sort=date-asc'));
-
-  if (response.statusCode == 200) {
-    final Map<String, dynamic> data = jsonDecode(response.body);
-    List<dynamic> res = [];
-    for (int i = 0; i < data['articles'].length; i++) {
-      if (data['articles'][i]['auteur'] == null) {
-        data['articles'][i]['auteur'] = "Inconnu";
-      } else {
-        final auteurInfo = await http.get(Uri.parse(
-            'http://docketu.iutnc.univ-lorraine.fr:20003/api/auteurs/' +
-                data['articles'][i]['auteur'].toString()));
-        final Map<String, dynamic> dataAutor = jsonDecode(auteurInfo.body);
-        data['articles'][i]['auteur'] = dataAutor['auteur'];
-      }
-
-      data['articles'][i]['resume'] = "";
-      data['articles'][i]['contenu'] = "";
-      data['articles'][i]['categorie'] = 0;
-
-      res.add(data['articles'][i]);
-    }
-    return res.map((json) => Articles.fromJson(json)).toList();
-  } else {
-    throw Exception('Failed to load Articles');
-  }
+  return loadArticles(api_links + 'articles?sort=date-asc');
 }
 
+/*
+ * Fonction qui permet de charger les articles d'une categorie
+ * @param categID : id de la categorie
+ * @return : liste d'articles de la categorie
+ */
 Future<List<Articles>> fetchArticlesByCategories(String categID) async {
-  final response = await http.get(Uri.parse(
-      'http://docketu.iutnc.univ-lorraine.fr:20003/api/categories/' +
-          categID +
-          '/articles'));
-
-  if (response.statusCode == 200) {
-    final Map<String, dynamic> data = jsonDecode(response.body);
-    List<dynamic> res = [];
-    print(data['articles']);
-    for (int i = 0; i < data['articles'].length; i++) {
-      if (data['articles'][i]['auteur'] == null) {
-        data['articles'][i]['auteur'] = "Inconnu";
-      } else {
-        final auteurInfo = await http.get(Uri.parse(
-            'http://docketu.iutnc.univ-lorraine.fr:20003/api/auteurs/' +
-                data['articles'][i]['auteur'].toString()));
-        final Map<String, dynamic> dataAutor = jsonDecode(auteurInfo.body);
-        data['articles'][i]['auteur'] = dataAutor['auteur'];
-      }
-
-      data['articles'][i]['resume'] = "";
-      data['articles'][i]['contenu'] = "";
-      data['articles'][i]['categorie'] = 0;
-      print(data['articles'][i]);
-      res.add(data['articles'][i]);
-    }
-    print("end");
-    return res.map((json) => Articles.fromJson(json)).toList();
-  } else {
-    throw Exception('Failed to load Articles');
-  }
+  return loadArticles(api_links + 'categories/' + categID + '/articles');
 }
 
-Future<Articles> fetchArticleByID(String id) async {
-  final response = await http.get(Uri.parse(
-      'http://docketu.iutnc.univ-lorraine.fr:20003/api/articles/' + id));
+/*
+ * Fonction qui permet de charger les articles d'une recherche
+ * @param word : mot a rechercher
+ * @return : liste d'articles qui contiennent le mot dans leur titre ou leur resume
+ */
+Future<List<Articles>> fetchArticlesBySearch(String word) async {
+  List<Articles> articles =
+      await loadArticles(api_links + 'articles?sort=date-asc');
+  List<Articles> res = [];
+  // pour chaque article on verifie si le mot est dans le titre ou le resume
+  for (int i = 0; i < articles.length; i++) {
+    if (articles[i].titre.contains(word) || articles[i].resume.contains(word)) {
+      res.add(articles[i]);
+    }
+  }
+  return res;
+}
 
+/*
+ * Fonction qui permet de charger les articles d'un auteur
+ * @param authorName : nom de l'auteur
+ * @return : liste d'articles de l'auteur
+ */
+Future<List<Articles>> fetchArticlesByAuthor(String authorName) async {
+  List<Articles> articles =
+      await loadArticles(api_links + 'articles?sort=date-asc');
+  List<Articles> res = [];
+  // pour chaque article on verifie si l'auteur est le bon
+  for (int i = 0; i < articles.length; i++) {
+    if (articles[i].author == authorName) {
+      res.add(articles[i]);
+    }
+  }
+  return res;
+}
+
+/*
+ * Fonction qui permet de charger les articles par ordre de date de creation
+ * @return : liste d'articles par ordre de date de creation
+ */
+Future<List<Articles>> fetchArticlesByOrderDateCreaAsc() async {
+  return loadArticles(api_links + 'articles?sort=date-asc');
+}
+
+/*
+ * Fonction qui permet de charger les articles par ordre de date de creation inverse
+ * @return : liste d'articles par ordre de date de creation inverse
+ */
+Future<List<Articles>> fetchArticlesByOrderDateCreaDesc() async {
+  return loadArticles(api_links + 'articles?sort=date-desc');
+}
+
+/*
+ * Fonction qui permet de charger un article par son id
+ * @param id : id de l'article
+ * @return : article
+ */
+Future<Articles> fetchArticleByID(String id) async {
+  // chargement de l'article en fonction de son id
+  final response = await http.get(Uri.parse(api_links + 'articles/' + id));
+
+  // si le chargement est reussi
   if (response.statusCode == 200) {
+    // recuperation des donnees json et conversion en map
     final Map<String, dynamic> data = jsonDecode(response.body);
+    // si l'auteur est null on le remplace par inconnu
     if (data['auteur'] == null) {
       data['auteur'] = "Inconnu";
+      // sinon on recupere les donnees de l'auteur
     } else {
-      final auteurInfo = await http.get(Uri.parse(
-          'http://docketu.iutnc.univ-lorraine.fr:20003/api/auteurs/' +
-              data['auteur'].toString()));
+      // recuperation des donnees json et conversion en map
+      final auteurInfo = await http
+          .get(Uri.parse(api_links + 'auteurs/' + data['auteur'].toString()));
+      // recuperation des donnees json et conversion en map
       final Map<String, dynamic> dataAutor = jsonDecode(auteurInfo.body);
       data['auteur'] = dataAutor['auteur'];
     }
 
+    // passage du contenu de l'article de markdown a html
     data['contenu'] = markdownToHtml(data['contenu']);
-    // data['contenu'] = parse(data['contenu']);
-    // dom.Document document = parsparse(htmlData);
 
     return Articles.fromJson(data);
+    // si le chargement echoue
   } else {
     throw Exception('Failed to load Article');
-  }
-}
-
-Future<List<Articles>> fetchArticlesBySearch(String word) async {
-  final response = await http.get(Uri.parse(
-      'http://docketu.iutnc.univ-lorraine.fr:20003/api/articles?sort=date-asc'));
-
-  if (response.statusCode == 200) {
-    final Map<String, dynamic> data = jsonDecode(response.body);
-    List<dynamic> res = [];
-    for (int i = 0; i < data['articles'].length; i++) {
-      if (data['articles'][i]['auteur'] == null) {
-        data['articles'][i]['auteur'] = "Inconnu";
-      } else {
-        final auteurInfo = await http.get(Uri.parse(
-            'http://docketu.iutnc.univ-lorraine.fr:20003/api/auteurs/' +
-                data['articles'][i]['auteur'].toString()));
-        final Map<String, dynamic> dataAutor = jsonDecode(auteurInfo.body);
-        data['articles'][i]['auteur'] = dataAutor['auteur'];
-      }
-
-      final response = await http.get(Uri.parse(
-          'http://docketu.iutnc.univ-lorraine.fr:20003/api/articles/' +
-              data['articles'][i]['id']));
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> dataArt = jsonDecode(response.body);
-        data['articles'][i]['resume'] = dataArt['resume'];
-        data['articles'][i]['contenu'] = dataArt['contenu'];
-        data['articles'][i]['categorie'] = dataArt['categorie'];
-      } else {
-        throw Exception('Failed to load Articles');
-      }
-      if (data['articles'][i]['titre'].toString().contains(word) ||
-          data['articles'][i]['resume'].toString().contains(word)) {
-        res.add(data['articles'][i]);
-      }
-    }
-    return res.map((json) => Articles.fromJson(json)).toList();
-  } else {
-    throw Exception('Failed to load Articles');
-  }
-}
-
-Future<List<Articles>> fetchArticlesByAuthor(String authorName) async {
-  final response = await http.get(
-    Uri.parse('http://docketu.iutnc.univ-lorraine.fr:20003/api/articles'),
-  );
-
-  if (response.statusCode == 200) {
-    final Map<String, dynamic> data = jsonDecode(response.body);
-    List<dynamic> res = [];
-
-    for (int i = 0; i < data['articles'].length; i++) {
-      if (data['articles'][i]['auteur'] == null) {
-        data['articles'][i]['auteur'] = "Inconnu";
-      } else {
-        final auteurInfo = await http.get(Uri.parse(
-          'http://docketu.iutnc.univ-lorraine.fr:20003/api/auteurs/' +
-              data['articles'][i]['auteur'].toString(),
-        ));
-        final Map<String, dynamic> dataAutor = jsonDecode(auteurInfo.body);
-        data['articles'][i]['auteur'] = dataAutor['auteur'];
-      }
-
-      data['articles'][i]['resume'] = "";
-      data['articles'][i]['contenu'] = "";
-      data['articles'][i]['categorie'] = 0;
-
-      if (data['articles'][i]['auteur'] == authorName) {
-        res.add(data['articles'][i]);
-      }
-    }
-    return res.map((json) => Articles.fromJson(json)).toList();
-  } else {
-    throw Exception('Failed to load Articles');
-  }
-}
-
-Future<List<Articles>> fetchArticlesByOrderDateCreaAsc() async {
-  final response = await http.get(Uri.parse(
-      'http://docketu.iutnc.univ-lorraine.fr:20003/api/articles?sort=date-asc'));
-
-  if (response.statusCode == 200) {
-    final Map<String, dynamic> data = jsonDecode(response.body);
-    List<dynamic> res = [];
-    for (int i = 0; i < data['articles'].length; i++) {
-      if (data['articles'][i]['auteur'] == null) {
-        data['articles'][i]['auteur'] = "Inconnu";
-      } else {
-        final auteurInfo = await http.get(Uri.parse(
-            'http://docketu.iutnc.univ-lorraine.fr:20003/api/auteurs/' +
-                data['articles'][i]['auteur'].toString()));
-        final Map<String, dynamic> dataAutor = jsonDecode(auteurInfo.body);
-        data['articles'][i]['auteur'] = dataAutor['auteur'];
-      }
-
-      data['articles'][i]['resume'] = "";
-      data['articles'][i]['contenu'] = "";
-      data['articles'][i]['categorie'] = 0;
-
-      res.add(data['articles'][i]);
-    }
-    return res.map((json) => Articles.fromJson(json)).toList();
-  } else {
-    throw Exception('Failed to load Articles');
-  }
-}
-
-Future<List<Articles>> fetchArticlesByOrderDateCreaDesc() async {
-  final response = await http.get(Uri.parse(
-      'http://docketu.iutnc.univ-lorraine.fr:20003/api/articles?sort=date-desc'));
-
-  if (response.statusCode == 200) {
-    final Map<String, dynamic> data = jsonDecode(response.body);
-    List<dynamic> res = [];
-    for (int i = 0; i < data['articles'].length; i++) {
-      if (data['articles'][i]['auteur'] == null) {
-        data['articles'][i]['auteur'] = "Inconnu";
-      } else {
-        final auteurInfo = await http.get(Uri.parse(
-            'http://docketu.iutnc.univ-lorraine.fr:20003/api/auteurs/' +
-                data['articles'][i]['auteur'].toString()));
-        final Map<String, dynamic> dataAutor = jsonDecode(auteurInfo.body);
-        data['articles'][i]['auteur'] = dataAutor['auteur'];
-      }
-
-      data['articles'][i]['resume'] = "";
-      data['articles'][i]['contenu'] = "";
-      data['articles'][i]['categorie'] = 0;
-
-      res.add(data['articles'][i]);
-    }
-    return res.map((json) => Articles.fromJson(json)).toList();
-  } else {
-    throw Exception('Failed to load Articles');
   }
 }
