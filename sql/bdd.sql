@@ -90,6 +90,12 @@ CREATE TABLE `image` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
+--
+-- Déchargement des données de la table `image`
+--
+
+INSERT INTO `image` (`id`, `url`) VALUES
+    (1, '../../../shared/img/p1100252.jpg');
 
 --
 -- Structure de la table `image2article`
@@ -99,6 +105,10 @@ CREATE TABLE `image2article` (
   `article_id` int NOT NULL,
   `image_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+INSERT INTO `image2article` (`article_id`, `image_id`) VALUES
+(1, 1);
 
 -- --------------------------------------------------------
 --
