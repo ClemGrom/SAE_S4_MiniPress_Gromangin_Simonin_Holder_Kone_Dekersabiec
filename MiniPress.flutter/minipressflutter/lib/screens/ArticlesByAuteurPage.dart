@@ -2,24 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:minipressflutter/models/Articles.dart';
 import 'package:minipressflutter/screens/ArticleDetails.dart';
 
+/*
+ * Page d'affichage des articles par auteur
+ */
 class ArticlesByAuteurPage extends StatefulWidget {
+  // Auteur des articles à afficher
   final String author;
 
+  // Constructeur de la classe
   const ArticlesByAuteurPage({Key? key, required this.author})
       : super(key: key);
 
+  // Méthode qui permet de créer l'état de la classe
   @override
   _ArticlesByAuteurPageState createState() => _ArticlesByAuteurPageState();
 }
 
+/*
+ * Classe qui permet de créer l'état de la classe ArticlesByAuteurPage
+ */
 class _ArticlesByAuteurPageState extends State<ArticlesByAuteurPage> {
+  // futureArticle : liste des articles à afficher
   late Future<List<Articles>> futureArticle;
+
+  // Méthode qui permet de créer l'état de la classe
   @override
   void initState() {
     super.initState();
+    // Récupération des articles à afficher
     futureArticle = fetchArticlesByAuthor(widget.author);
   }
 
+  // Méthode qui permet de créer l'affichage de la classe
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -32,6 +46,7 @@ class _ArticlesByAuteurPageState extends State<ArticlesByAuteurPage> {
         appBar: AppBar(
           title: const Text('Articles par auteur'),
         ),
+        // Affichage des articles
         body: Center(
           child: FutureBuilder<List<Articles>>(
             future: futureArticle,
@@ -75,6 +90,7 @@ class _ArticlesByAuteurPageState extends State<ArticlesByAuteurPage> {
             },
           ),
         ),
+        // Barre de navigation
         bottomNavigationBar: BottomAppBar(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,

@@ -6,28 +6,45 @@ import 'package:minipressflutter/screens/ArticleDetails.dart';
 import 'package:minipressflutter/screens/ArticlesSearchPage.dart';
 import 'package:minipressflutter/screens/ArticlesByAuteurPage.dart';
 
+/*
+  * Classe qui permet de retourner un affichage pour la liste de tous les articles
+  */
 class ArticlesPage extends StatefulWidget {
+  // Constructeur
   const ArticlesPage({Key? key}) : super(key: key);
 
+  // Méthode qui permet de créer l'état de la classe
   @override
   _ArticlesPageState createState() => _ArticlesPageState();
 }
 
+/*
+ * Classe qui permet de créer l'état de la classe ArticlesPage
+ */
 class _ArticlesPageState extends State<ArticlesPage> {
+  // futureArticles : liste des articles à afficher
   late Future<List<Articles>> futureArticles;
+  // articlesList : liste des articles à afficher
   late List<Articles> articlesList;
+  // isReversed : booléen qui permet de savoir si la liste est inversée ou non
   bool isReversed = false;
 
+  // Méthode qui permet de créer l'état de la classe
   final TextEditingController _searchController = TextEditingController();
 
+  // Méthode qui permet de créer l'état de la classe
   @override
   void initState() {
     super.initState();
+    // Récupération des articles à afficher
     futureArticles = fetchArticles();
   }
 
+  // Méthode qui permet de récupérer la liste des articles
   Future<List<Articles>> fetchArticles() async {
+    // Récupération de la liste des articles
     List<Articles> articles = await fetchArticlesByOrderDateCreaDesc();
+    // Inversion de la liste si besoin
     if (isReversed) {
       articles = articles.reversed.toList();
     }
@@ -35,6 +52,7 @@ class _ArticlesPageState extends State<ArticlesPage> {
     return articles;
   }
 
+  // Méthode qui permet de changer l'ordre d'affichage des articles
   void changeOrder() {
     setState(() {
       isReversed = !isReversed;
@@ -42,6 +60,7 @@ class _ArticlesPageState extends State<ArticlesPage> {
     });
   }
 
+  // Méthode qui permet de créer l'affichage de la classe
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -52,6 +71,7 @@ class _ArticlesPageState extends State<ArticlesPage> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
+          // Barre de recherche
           title: Container(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: TextField(
@@ -91,6 +111,7 @@ class _ArticlesPageState extends State<ArticlesPage> {
             ),
           ],
         ),
+        // Affichage des articles
         body: Center(
           child: FutureBuilder<List<Articles>>(
             future: futureArticles,
