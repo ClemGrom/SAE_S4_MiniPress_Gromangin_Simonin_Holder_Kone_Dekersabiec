@@ -95,7 +95,7 @@ CREATE TABLE `image` (
 --
 
 INSERT INTO `image` (`id`, `url`) VALUES
-    (1, '../../../shared/img/p1100252.jpg');
+    (1, 'p1100252.jpg');
 
 --
 -- Structure de la table `image2article`

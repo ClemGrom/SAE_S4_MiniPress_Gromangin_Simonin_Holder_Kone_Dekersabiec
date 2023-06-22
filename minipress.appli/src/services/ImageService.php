@@ -9,9 +9,6 @@ class ImageService
     public function getImages()
     {
         $images = Image::all();
-        foreach ($images as $image) {
-            $image->url = substr($image->url, 20);
-        }
         return $images->toArray();
     }
 
