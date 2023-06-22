@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:minipressflutter/models/Articles.dart';
 import 'package:minipressflutter/screens/ArticleAffichage.dart';
-import 'package:minipressflutter/screens/ArticleDetails.dart';
 
+/* ArticlesSearchPage
+*param : search : String
+*return : _ArticlesSearchPageState */
 class ArticlesSearchPage extends StatefulWidget {
   final String search;
   const ArticlesSearchPage({Key? key, required this.search}) : super(key: key);
@@ -11,10 +13,11 @@ class ArticlesSearchPage extends StatefulWidget {
   _ArticlesSearchPageState createState() => _ArticlesSearchPageState();
 }
 
+/* _ArticlesSearchPageState
+*param : futureArticles : Future<List<Articles>>
+*return : ArticleAffichagePage */
 class _ArticlesSearchPageState extends State<ArticlesSearchPage> {
   late Future<List<Articles>> futureArticles;
-
-  final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
@@ -24,7 +27,6 @@ class _ArticlesSearchPageState extends State<ArticlesSearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    print(futureArticles == [null]);
     return ArticleAffichagePage(articles: futureArticles);
   }
 }
