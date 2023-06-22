@@ -2,12 +2,11 @@
 
 namespace minipress\app\actions;
 
-use minipress\appli\services\AuthorServices;
+use minipress\appli\services\AuthorService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\InvalidArgumentException;
 use Slim\Views\Twig;
-use minipress\appli\services\AuthorService;
 
 class ConnectUserAction extends Action
 {
