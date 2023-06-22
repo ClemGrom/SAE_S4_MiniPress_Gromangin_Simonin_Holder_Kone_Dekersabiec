@@ -1,0 +1,133 @@
+public function checkPasswordStrength(string $pass): bool {
+
+        $digit = preg_match("#[\d]#", $pass); // au moins un digit
+        $special = preg_match("#[\W]#", $pass); // au moins un car. spécial
+        $lower = preg_match("#[a-z]#", $pass); // au moins une minuscule
+        $upper = preg_match("#[A-Z]#", $pass); // au moins une majuscule
+        if ( !$digit || !$special || !$lower || !$upper)return false;
+        return true;
+
+    }
+
+    public function checkUsernameDB(string $username): bool {
+
+        $user = Utilisateur::where('username', $username)->first();
+        if ($user) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public function checkEmailDB(string $email): bool {
+
+        $user = Utilisateur::where('email', $email)->first();
+        if ($user) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function CreateUser(ServerRequestInterface $request, ResponseInterface $response, array &$args): ResponseInterface
+    {
+
+        if (strlen($args['password']) < 10) {
+            throw new InvalidArgumentException('Le mot de passe doit contenir au moins 10 caractères');
+        }
+
+        if (!$this->checkPasswordStrength($args['password'])) {
+            throw new InvalidArgumentException('Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial');
+        }
+
+        if (strlen($args['username']) < 3) {
+            throw new InvalidArgumentException("L'username doit contenir au moins 3 caractères.");
+        }
+
+        if (!$this->checkUsernameDB($args['username'])) {
+            throw new InvalidArgumentException("L'username est déjà utilisé.");
+        }
+        if (!$this->checkEmailDB($args['email'])) {
+            throw new InvalidArgumentException("L'email est déjà utilisé.");
+        }
+
+        $args['activation_token'] = bin2hex(random_bytes(64));
+
+        $hash=password_hash($args['password'], PASSWORD_DEFAULT, $options=[]);
+
+        $user = new Utilisateur();
+        $user->username = $args['username'];
+        $user->email = $args['email'];
+        $user->password = $hash;
+        $user->activation_token = $args['activation_token'];
+        $user->user_status = 2;
+
+
+        return $user;
+    }
+	
+	
+	
+if ($_POST["REQUEST_METHOD"] == "POST" && isset($_POST['createaccount'])) {
+        $args['username'] = $_POST["Cusername"];
+        if ($_POST["Cpassword"] == $_POST["CCpassword"]) {
+            $args['password'] = $_POST["Cpassword"];
+        } else {
+            throw new InvalidArgumentException('Les mots de passe ne correspondent pas');
+        }
+        $args['email'] = $_POST["Cemail"];
+
+        try {
+            $result = CreateUser($args);
+        } catch (InvalidArgumentException $e) {
+            $error = $e->getMessage();
+        } catch (Exception $e) {
+            $error = "Une erreur est survenue";
+        }
+
+        $user = CreateUser($args);
+        AuthorService::saveUser($user);
+    }
+
+
+
+
+public function checkUsernameDB(string $username): bool {
+
+        $user = Utilisateur::where('username', $username)->first();
+        if ($user) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function checkPasswordValid(string $pass, string $username) :bool
+    {
+        $user = Utilisateur::where('username', $username)->first();
+        if ($pass == $user->passwd_hash) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function ConnectUser( $args ) :Utilisateur
+    {
+        $connect = new AuthorService();
+        $id = $connect->getAuthorID($args['id']);
+        $_SESSION['id'] = $id;
+
+        $user = Utilisateur::where('id', $id)->first();
+        if ($user->user_status == 1) {
+            $user->user_status = 3;
+        } else {
+            $user->user_status = 4;
+        }
+
+        return $user;
+    }
+
