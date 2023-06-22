@@ -26,8 +26,6 @@ class CreateUserAction extends Action
         }
     }
 
-
-
     public function checkPasswordStrength(string $pass): bool {
 
         $digit = preg_match("#[\d]#", $pass); // au moins un digit
@@ -93,6 +91,7 @@ class CreateUserAction extends Action
         $user->email = $args['email'];
         $user->password = $hash;
         $user->activation_token = $args['activation_token'];
+        $user->user_status = 2;
 
 
         return $user;
